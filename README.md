@@ -7,11 +7,9 @@ Aqui você encontrará estudos de caso práticos usando Python, SQL, Power BI, M
 
 ## 🧠 Principais Categorias
 
-- 📈 [Análise de Dados](./analise-dados/)
-- 🧪 [Ciência de Dados Machine Learning](./ciencia-dados/)
-- 🤖 [Machine Learning](./machine-learning/)
+- 📈 [Análise de Dados - Dashboards e BI ](./analise-dados/)
+- 🧪 [Ciência de Dados - Machine Learning](./ciencia-dados/)
 - 🧠 [IA e NLP](./ia-nlp/)
-- 📊 [Dashboards e BI](./dashboards/)
 - 💾 [SQL e Bancos de Dados](./sql/)
 
 ## 🚀 Sobre Mim
