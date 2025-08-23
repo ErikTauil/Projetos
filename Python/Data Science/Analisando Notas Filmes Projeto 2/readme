@@ -1,1 +1,63 @@
+🎬 Análise de Dados dos Filmes (TMDB 5000)
+
+Este repositório contém um projeto de análise de dados dos filmes baseado no dataset TMDB 5000 Movies, que foi utilizado para explorar e analisar diversas métricas relacionadas a filmes, como receita, orçamento, lingua original, entre outros. O objetivo deste projeto é entender as características que afetam o sucesso financeiro dos filmes, analisando diferentes linguagens e as distribuições de orçamento e receita.
+
+----------------------------------
+🧑‍💻 Como Usar este Repositório
+
+Este repositório contém scripts em Python para análise de dados dos filmes. Para rodar o código, você precisa ter o Python instalado e algumas bibliotecas específicas.
+
+-----------------------
+🔧 Pré-Requisitos
+
+Instalar o Python 3.x
+
+Se você não tem o Python instalado, baixe aqui.
+
+Instalar as dependências necessárias
+
+Use o pip para instalar as bibliotecas requeridas:
+
+pip install pandas matplotlib seaborn
+
+
+Obter o dataset
+
+O projeto utiliza o arquivo tmdb_5000_movies.csv. Você pode baixar este dataset em TMDB 5000 Movies.
+
+Salve o arquivo na pasta data/ ou no diretório onde o seu script Python está localizado.
+
+-------------------------
+🚀 Rodando o Código
+
+Depois de instalar as dependências e preparar o dataset, basta rodar o script analise_filmes.py com o seguinte comando:
+
+python analise_filmes.py
+
+
+O script irá gerar gráficos de distribuição de dados, incluindo gráficos de barras, distribuições de receitas e orçamentos, e análise das linguagens originais dos filmes.
+
+📊 O que está incluído
+
+O código contém diversas análises exploratórias, incluindo:
+
+Resumo Estatístico: Uma análise detalhada das colunas de receita e orçamento dos filmes.
+
+Distribuição de Dados: Visualizações de como os filmes estão distribuídos em termos de receita, orçamento e língua original.
+
+Análise de Linguagem: Contagem e visualização das línguas originais dos filmes, com gráficos de barras e pizza.
+
+Análise de Filmes com Baixa Receita: Filtragem dos filmes com receita abaixo de 500 dólares para análise de dados ausentes ou inválidos.
+
+------------------------------------------------
+
+🤔 O que podemos aprender com isso?
+
+Este projeto busca explorar a relação entre várias variáveis do dataset, como:
+
+Como o orçamento impacta a receita dos filmes?
+
+Quais são as línguas mais comuns em filmes de sucesso?
+
+Existe alguma correlação entre a língua original e o sucesso financeiro?
 
