@@ -7,7 +7,7 @@ Transformar dados de imigração em gráficos interativos que permitam **descobr
 
 ## 🛠️ Tecnologias Utilizadas
 - Python
-- Google Colab
+- VS CODE
 - Pandas
 - Plotly Express
 
