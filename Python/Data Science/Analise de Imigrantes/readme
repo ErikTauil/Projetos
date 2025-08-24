@@ -1,1 +1,26 @@
+# 📊 Visualização Interativa com Plotly: Imigração da América do Sul para o Canadá (1980–2013)
+
+Este projeto explora o poder da visualização interativa de dados com Python e a biblioteca **Plotly**. Através de gráficos de linha interativos, analisamos a imigração de países da América do Sul para o Canadá ao longo de mais de 30 anos.
+
+## 📌 Objetivo
+Transformar dados de imigração em gráficos interativos que permitam **descobrir insights**, **contar histórias com dados** e **facilitar a tomada de decisões**.
+
+## 🛠️ Tecnologias Utilizadas
+- Python
+- Google Colab
+- Pandas
+- Plotly Express
+
+## 📈 O que este projeto mostra
+- Comparação entre diferentes países sul-americanos.
+- Tendências históricas de imigração ao Canadá.
+- Interatividade com filtros, zoom, tooltips e marcadores.
+
+## 🚀 Como Executar
+1. Clone este repositório.
+2. Abra o notebook no Google Colab ou Jupyter.
+3. Execute todas as células.
+4. Para salvar o gráfico interativo:
+   ```python
+   fig.write_html('imigracao_america_sul.html')
 
