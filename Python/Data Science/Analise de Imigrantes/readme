@@ -9,6 +9,8 @@ Transformar dados de imigração em gráficos interativos que permitam **descobr
 - Python
 - VS Code Jupyter
 - Pandas
+- Matplotlib
+- Seaborn
 - Plotly Express
 
 ## 📈 O que este projeto mostra
