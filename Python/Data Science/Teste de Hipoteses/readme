@@ -1,1 +1,96 @@
+📊 Testes de Hipóteses e Intervalos de Confiança com Bootstrap
+
+Este repositório contém exemplos práticos de Estatística Aplicada em Python, com foco em reamostragem (bootstrap), distribuições amostrais e intervalos de confiança.
+A ideia é mostrar, de forma didática, como calcular médias, erro padrão e intervalos de confiança tanto pelo método paramétrico (Normal) quanto pelo método não paramétrico (Bootstrap).
+
+🚀 Funcionalidades
+
+📈 Visualização das distribuições originais (idade de aposentadoria, vida útil de lâmpadas e altura de funcionários).
+
+🔄 Reamostragem com bootstrap para simular distribuições de médias.
+
+🧮 Cálculo de erro padrão e comparação entre médias populacionais e amostrais.
+
+📊 Construção de intervalos de confiança via distribuição Normal e via Bootstrap.
+
+🎯 Teste de hipóteses prático para verificar se uma nova média é compatível com o comportamento amostral.
+
+📂 Estrutura do Projeto
+📦 projeto-bootstrap
+ ┣ 📂 data
+ ┃ ┣ dados_idade_aposentadoria.csv
+ ┃ ┣ dados_vida_lampada.csv
+ ┃ ┗ dados_alturas.csv
+ ┣ 📜 notebook.ipynb   # Notebook principal com código e gráficos
+ ┣ 📜 main.py          # Script Python equivalente ao notebook
+ ┣ 📜 README.md        # Documentação do projeto
+ ┗ 📜 requirements.txt # Dependências do projeto
+
+🛠️ Tecnologias Utilizadas
+
+Python 3.x
+
+Pandas
+ – manipulação de dados
+
+NumPy
+ – operações matemáticas
+
+Matplotlib
+ – visualização de gráficos
+
+SciPy
+ – funções estatísticas
+
+📊 Exemplos de Resultados
+
+Histograma da distribuição original e da distribuição de médias amostrais
+
+Cálculo do erro padrão a partir da reamostragem
+
+Intervalo de confiança a 95% para a vida útil de lâmpadas:
+
+IC 95% (Normal): [1705.4 , 1758.6]
+IC 95% (Bootstrap): [1707.2 , 1759.3]
+
+▶️ Como Executar
+
+Clone o repositório:
+
+git clone https://github.com/seu-usuario/projeto-bootstrap.git
+cd projeto-bootstrap
+
+
+Crie e ative um ambiente virtual (opcional, mas recomendado):
+
+python -m venv venv
+source venv/bin/activate  # Linux / Mac
+venv\Scripts\activate     # Windows
+
+
+Instale as dependências:
+
+pip install -r requirements.txt
+
+
+Execute o notebook:
+
+jupyter notebook notebook.ipynb
+
+
+ou o script Python:
+
+python main.py
+
+📖 Conceitos Envolvidos
+
+Distribuição Amostral da Média
+
+Bootstrap (reamostragem com reposição)
+
+Erro Padrão (EP)
+
+Intervalos de Confiança (Normal vs Bootstrap)
+
+Testes de Hipóteses
 
