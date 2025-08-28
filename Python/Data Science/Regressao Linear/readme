@@ -1,1 +1,118 @@
+# 🏡 Testando Relações com Regressão Linear
 
+Este projeto tem como objetivo principal **precificar o valor de venda de casas utilizando Regressão Linear**.  
+Além disso, busca identificar quais fatores mais contribuem para explicar o preço de uma residência.  
+
+Esta abordagem serve como uma introdução a **modelos de Machine Learning**, ajustando um modelo inicial para prever valores imobiliários.
+
+---
+
+## 🎯 Objetivos do Projeto
+
+- **Visualizar Relações de Variáveis**: Utilizar o `pairplot` do Seaborn para explorar a relação entre múltiplas variáveis.  
+- **Adicionar Múltiplas Variáveis**: Aprimorar a precisão adicionando múltiplos fatores explicativos ao modelo.  
+- **Comparar Modelos**: Avaliar modelos de regressão linear usando R², R² ajustado e multicolinearidade.  
+- **Interpretar Coeficientes**: Entender o impacto de cada variável no preço das casas.  
+- **Escolher o Modelo Ideal**: Priorizar simplicidade, precisão e interpretabilidade.  
+
+---
+
+## 🛠️ Tecnologias e Ferramentas
+
+- Python 3.x  
+- VS Code  
+- **Pandas** → Manipulação e análise de dados  
+- **Scikit-learn (sklearn)** → Treinamento, teste e avaliação com R²  
+- **Statsmodels** → Construção e interpretação da regressão linear  
+- **Matplotlib** → Visualizações estáticas  
+- **Seaborn** → Visualizações estatísticas (ex: pairplot)  
+- **Plotly Express** → Visualizações interativas e regressão OLS  
+
+---
+
+## 📂 Mini-Projetos Desenvolvidos
+
+### 🔹 Mini-Projeto 1: Entendendo e Preparando a Base de Dados
+- Dataset: `Preços_de_casas.csv` (adaptado da base *House Prices - Kaggle*).  
+- Limpeza inicial: remoção da coluna `Id`.  
+- Variáveis analisadas:  
+  - `area_primeiro_andar`  
+  - `existe_segundo_andar`  
+  - `area_segundo_andar`  
+  - `quantidade_banheiros`  
+  - `capacidade_carros_garagem`  
+  - `qualidade_da_cozinha_Excelente`  
+  - `preco_de_venda`  
+
+---
+
+### 🔹 Mini-Projeto 2: Análise de Correlação e Visualização
+- **Método Estatístico**: Coeficiente de Correlação (-1 a 1).  
+- **Resultados**: maior correlação → `area_primeiro_andar` e `capacidade_carros_garagem`.  
+- **Visualização**:  
+  - Gráfico de dispersão (`area_primeiro_andar` × `preco_de_venda`).  
+  - Linha de regressão com OLS:  
+
+\[
+  Y_{i} = B_{0} + B_{1} \cdot X_{i}
+\]
+
+---
+
+### 🔹 Mini-Projeto 3: Treinamento e Interpretação do Modelo
+- **Split dos dados**: 70% treino / 30% teste (`train_test_split`).  
+- **Resultados do modelo simples (modelo_0)**:  
+  - Intercepto (B₀): **R$ 152.909,28**  
+  - Coeficiente (B₁): **R$ 6.793,64**  
+- **Interpretação**:  
+  - Cada 1m² adicional → +R$ 6.793,64 no preço da casa.  
+
+---
+
+### 🔹 Mini-Projeto 4: Avaliação do Modelo
+- **R² no treino**: 0.37  
+- **R² no teste**: 0.38  
+- **Conclusão**: Modelo consistente, mas outros fatores precisam ser incluídos.  
+
+---
+
+### 🔹 Mini-Projeto 5: Modelos de Regressão Múltipla
+- **Exploração**: `pairplot` do Seaborn.  
+- **Modelos testados**:  
+  - `modelo_1` → Todas variáveis  
+  - `modelo_2` → Sem `area_segundo_andar`  
+  - `modelo_3` → Sem variáveis de garagem  
+- **Conclusão**: `modelo_3` foi o melhor → **R² = 0.65**, sem multicolinearidade.  
+
+**Coeficientes modelo_3:**  
+- `area_primeiro_andar` → +R$ 6.119,65  
+- `quantidade_banheiros` → +R$ 149.036,29  
+- `existe_segundo_andar` → +R$ 221.306,96  
+- `qualidade_da_cozinha_Excelente` → +R$ 444.391,23  
+
+---
+
+### 🔹 Mini-Projeto 6: Previsão e Avaliação Final
+- **R² do treino**: 0.651  
+- **R² do teste**: 0.643  
+- **Previsão individual**: Casa (120m², 2 banheiros, segundo andar, cozinha mediana) → **R$ 1.123.758,00**.  
+- **Previsão em lote**: Preços de 10 casas de um novo CSV.  
+
+---
+
+### 🔹 Mini-Projeto 7: Investigando a Metodologia
+- **Multicolinearidade (VIF)**:  
+  - `modelo_1`: VIF > 7 → problema confirmado.  
+  - `modelo_3`: VIF < 2 → coeficientes confiáveis.  
+- **Análise de resíduos**: Heteroscedasticidade encontrada (erros aumentam em casas mais caras).  
+
+---
+
+## 📖 Storytelling: A Jornada de um Analista de Dados
+Imagine-se como um analista de dados em uma imobiliária.  
+A missão: **entender o mercado e precificar casas**.  
+
+1. O **detetive de dados** explora arquivos de vendas → identifica pistas.  
+2. A **estatística confirma** a intuição: área e banheiros são decisivos.  
+3. A **regressão linear aprende a reta** que conecta tamanho ao preço.  
+4. O modelo atinge **R² de 0.74** com múltipl
