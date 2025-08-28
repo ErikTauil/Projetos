@@ -1,96 +1,133 @@
-📊 Testes de Hipóteses e Intervalos de Confiança com Bootstrap
+# 📊 Análise de Dados e Testes de Hipóteses  
 
-Este repositório contém exemplos práticos de Estatística Aplicada em Python, com foco em reamostragem (bootstrap), distribuições amostrais e intervalos de confiança.
-A ideia é mostrar, de forma didática, como calcular médias, erro padrão e intervalos de confiança tanto pelo método paramétrico (Normal) quanto pelo método não paramétrico (Bootstrap).
+Como analista de dados, seu objetivo foi resolver uma série de desafios de negócios, utilizando a estatística para fundamentar decisões estratégicas.  
+Através de um portfólio de mini-projetos, você aplicou diversos testes de hipóteses para extrair insights significativos dos dados.  
 
-🚀 Funcionalidades
+Este documento consolida a **metodologia, a execução e os resultados** de cada análise.  
 
-📈 Visualização das distribuições originais (idade de aposentadoria, vida útil de lâmpadas e altura de funcionários).
+---
 
-🔄 Reamostragem com bootstrap para simular distribuições de médias.
+## 🚀 Projeto 1: Controle de Qualidade de Lâmpadas  
 
-🧮 Cálculo de erro padrão e comparação entre médias populacionais e amostrais.
+O primeiro desafio foi aprimorar o controle de qualidade de uma fábrica de lâmpadas. A suposição era que a duração média das lâmpadas era de **1.732 horas**. O objetivo foi criar um método para acionar o controle de qualidade apenas quando necessário, evitando verificações constantes.  
 
-📊 Construção de intervalos de confiança via distribuição Normal e via Bootstrap.
+**🔹 Método Estatístico Aplicado**  
+- Intervalo de Confiança: estabeleceu a margem de erro em torno da média de 1.732 horas.  
+- Teste Z para uma Amostra: comparou a média de uma nova amostra com a média populacional.  
 
-🎯 Teste de hipóteses prático para verificar se uma nova média é compatível com o comportamento amostral.
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `scipy.stats`, `statsmodels`.  
+- Functions: `stats.norm.interval()`, `statsmodels.stats.weightstats.ztest()`.  
 
-📂 Estrutura do Projeto
-📦 projeto-bootstrap
- ┣ 📂 data
- ┃ ┣ dados_idade_aposentadoria.csv
- ┃ ┣ dados_vida_lampada.csv
- ┃ ┗ dados_alturas.csv
- ┣ 📜 notebook.ipynb   # Notebook principal com código e gráficos
- ┣ 📜 main.py          # Script Python equivalente ao notebook
- ┣ 📜 README.md        # Documentação do projeto
- ┗ 📜 requirements.txt # Dependências do projeto
+**🔹 Insights**  
+- Média da nova amostra: **1521,96 horas** (fora do intervalo de confiança: 1532,43 – 1607,57).  
+- P-valor: **0.003** → rejeição da hipótese nula.  
+- Recomendação: sistema de controle automatizado para verificar somente quando necessário.  
 
-🛠️ Tecnologias Utilizadas
+---
 
-Python 3.x
+## 🚀 Projeto 2: Análise de SLA em Empresa de Software  
 
-Pandas
- – manipulação de dados
+O objetivo foi verificar se o suporte técnico cumpria o SLA de **30 minutos**.  
 
-NumPy
- – operações matemáticas
+**🔹 Método Estatístico Aplicado**  
+- Teste T para uma Amostra: apropriado para amostra pequena (25 observações).  
 
-Matplotlib
- – visualização de gráficos
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `numpy`, `scipy.stats`.  
+- Functions: `numpy.mean()`, `scipy.stats.ttest_1samp()`.  
 
-SciPy
- – funções estatísticas
+**🔹 Insights**  
+- Média: **29,96 minutos**.  
+- P-valor: **0.4586** → não significativo.  
+- Conclusão: não há evidências suficientes para afirmar que o tempo médio é menor que 30 minutos.  
 
-📊 Exemplos de Resultados
+---
 
-Histograma da distribuição original e da distribuição de médias amostrais
+## 🚀 Projeto 3: Vendas vs. Anúncios em E-commerce  
 
-Cálculo do erro padrão a partir da reamostragem
+Análise da eficácia de uma campanha de anúncios em e-commerce de tênis.  
 
-Intervalo de confiança a 95% para a vida útil de lâmpadas:
+**🔹 Método Estatístico Aplicado**  
+- Teste T para Amostras Independentes.  
 
-IC 95% (Normal): [1705.4 , 1758.6]
-IC 95% (Bootstrap): [1707.2 , 1759.3]
+**🔹 Visualização de Dados**  
+- Histograma para comparar distribuições.  
 
-▶️ Como Executar
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `numpy`, `matplotlib.pyplot`, `scipy.stats`.  
+- Functions: `numpy.mean()`, `matplotlib.pyplot.hist()`, `scipy.stats.ttest_ind()`.  
 
-Clone o repositório:
+**🔹 Insights**  
+- Médias: **R$ 286,47 vs. R$ 286,06**.  
+- P-valor: **0.485** → diferença não significativa.  
+- Recomendação: reavaliar estratégia de anúncios.  
 
-git clone https://github.com/seu-usuario/projeto-bootstrap.git
-cd projeto-bootstrap
+---
 
+## 🚀 Projeto 4: Treinamento de Equipe de Atendimento  
 
-Crie e ative um ambiente virtual (opcional, mas recomendado):
+Avaliação do impacto do treinamento na satisfação dos clientes.  
 
-python -m venv venv
-source venv/bin/activate  # Linux / Mac
-venv\Scripts\activate     # Windows
+**🔹 Método Estatístico Aplicado**  
+- Teste T para Amostras Pareadas.  
 
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `scipy.stats`.  
+- Function: `scipy.stats.ttest_rel()`.  
 
-Instale as dependências:
+**🔹 Insights**  
+- Aumento nas notas de satisfação após treinamento.  
+- P-valor: **0.000627** → significativo.  
+- Conclusão: treinamento teve efeito positivo e deve ser padrão.  
 
-pip install -r requirements.txt
+---
 
+## 🚀 Projeto 5: Teste de Treino em Academia  
 
-Execute o notebook:
+Comparação da eficácia de dois planos de treino (A e B).  
 
-jupyter notebook notebook.ipynb
+**🔹 Método Estatístico Aplicado**  
+- Teste U de Mann-Whitney (não paramétrico, ideal para amostras pequenas).  
 
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `scipy.stats`.  
+- Function: `scipy.stats.mannwhitneyu()`.  
 
-ou o script Python:
+**🔹 Insights**  
+- P-valor: **0.4606** → não significativo.  
+- Conclusão: Treino A e B são igualmente eficazes.  
 
-python main.py
+---
 
-📖 Conceitos Envolvidos
+## 🚀 Projeto 6: Layout de Academia  
 
-Distribuição Amostral da Média
+Avaliação da preferência dos clientes após mudança no layout.  
 
-Bootstrap (reamostragem com reposição)
+**🔹 Método Estatístico Aplicado**  
+- Teste de Wilcoxon (dados ordinais e amostras pareadas).  
 
-Erro Padrão (EP)
+**🔹 Tecnologias Utilizadas**  
+- Python Libraries: `scipy.stats`.  
+- Function: `scipy.stats.wilcoxon()`.  
 
-Intervalos de Confiança (Normal vs Bootstrap)
+**🔹 Insights**  
+- Aumento nas notas de preferência.  
+- P-valor: **0.0185** → significativo.  
+- Conclusão: mudança de layout positiva.  
 
-Testes de Hipóteses
+---
 
+## 🛠️ Tecnologias Utilizadas  
+
+- **Linguagem de Programação:** Python  
+- **Ambiente de Desenvolvimento:** VS Code Python  
+- **Bibliotecas Principais:**  
+  - [NumPy](https://numpy.org/): operações numéricas.  
+  - [Pandas](https://pandas.pydata.org/): manipulação e leitura de dados (CSV).  
+  - [Matplotlib](https://matplotlib.org/): visualização (histogramas).  
+  - [SciPy](https://scipy.org/): testes estatísticos (`stats.norm`, `stats.ttest_1samp`, `stats.ttest_ind`, `stats.ttest_rel`, `stats.mannwhitneyu`, `stats.wilcoxon`).  
+  - [Statsmodels](https://www.statsmodels.org/): Teste Z (`statsmodels.stats.weightstats.ztest`).  
+
+---
+📌 Esse portfólio demonstra como aplicar estatística em **problemas reais de negócios**, transformando dados em **insights estratégicos**.
