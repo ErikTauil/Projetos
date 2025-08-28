@@ -108,11 +108,46 @@ Esta abordagem serve como uma introdução a **modelos de Machine Learning**, aj
 
 ---
 
-## 📖 Storytelling: A Jornada de um Analista de Dados
-Imagine-se como um analista de dados em uma imobiliária.  
+
+
+
+
+---
+
+## 📖 Storytelling: A Jornada de um Cientista de Dados
+
+Imagine-se como um **Cientista de Dados** em uma imobiliária.  
 A missão: **entender o mercado e precificar casas**.  
 
-1. O **detetive de dados** explora arquivos de vendas → identifica pistas.  
-2. A **estatística confirma** a intuição: área e banheiros são decisivos.  
-3. A **regressão linear aprende a reta** que conecta tamanho ao preço.  
-4. O modelo atinge **R² de 0.74** com múltipl
+No início da jornada, você atua como um verdadeiro **detetive de dados**:  
+explorando arquivos de vendas passadas, caçando padrões e pistas escondidas nos números.  
+
+A intuição dizia que o tamanho da casa e o número de banheiros influenciavam o preço — mas era preciso provar com estatística.  
+O cálculo da correlação confirmou a hipótese: a **área do primeiro andar** era a variável mais influente.  
+
+A partir daí, a missão evoluiu: de detetive, você passou a **cientista**.  
+Com regressão linear, foi possível transformar os dados em um **modelo preditivo** capaz de aprender a “melhor reta” que conecta o tamanho ao preço.  
+O conjunto de dados foi dividido em treino e teste, garantindo que o modelo não apenas memorizasse, mas realmente aprendesse.  
+
+O modelo final mostrou que:  
+- Para cada metro quadrado adicional no primeiro andar, o preço da casa aumenta em cerca de **R$ 6.793**.  
+- O R² confirmou que só a área do primeiro andar já explica mais de **um terço da variação dos preços**.  
+
+Mas o trabalho de um cientista de dados não para aí. Explorando mais variáveis com visualizações como o *pairplot*, descobriu-se que banheiros, garagem e cozinha também impactavam o preço.  
+Modelos mais completos foram testados, chegando a um R² de **0.74**.  
+
+Porém, um dilema surgiu: modelos com maior R² apresentaram **multicolinearidade**, dificultando a interpretação.  
+O cientista de dados fez uma escolha crítica: abrir mão de um pouco de poder explicativo para ganhar **robustez e confiabilidade**.  
+Assim nasceu o **modelo_3**, com R² de **0.65**, coeficientes consistentes e interpretações claras.  
+
+No fim, a história mostra a evolução:  
+- O **detetive de dados** encontrou pistas.  
+- O **cientista de dados** construiu modelos.  
+- O resultado foi uma ferramenta **precisa, interpretável e confiável** para precificar casas e apoiar decisões no mercado imobiliário.  
+
+---
+
+## 📌 Conclusão
+Este projeto demonstrou como **estatística, regressão linear e machine learning** podem ser aplicados para resolver problemas reais de negócio, explorando desde a **limpeza dos dados** até a **escolha do melhor modelo**.
+
+---
