@@ -43,4 +43,25 @@ A meta não era apenas apresentar dados, mas sim **contar a jornada dos imigrant
 A análise inicia com um olhar macro sobre a imigração brasileira.  
 O gráfico de linha mostra altos e baixos, mas com clara **tendência de crescimento a partir dos anos 2000**.  
 
-📌 Destaques
+
+📌 Destaques:  
+- **2010**: Pico de **2.598 imigrantes**, um marco na busca por novas oportunidades.  
+- **2011**: Queda abrupta após o auge.
+
+Ampliando para toda a América do Sul:
+- O Brasil não é o líder em imigração, mas sua trajetória é **única**.  
+- A Colômbia tem fluxo massivo.  
+- A Argentina atingiu o pico em 2003, antes do Brasil.  
+
+O **gráfico interativo com Plotly** foi essencial:  
+- Permitiu **comparar países** dinamicamente.  
+- Tornou a apresentação **exploratória e colaborativa**, onde o público podia interagir, filtrar e até fazer zoom em anos específicos.
+
+---
+
+## ✨ Conclusão
+
+A análise mostrou que **visualização de dados vai muito além de gráficos bonitos**.  
+É sobre **transformar números em uma narrativa poderosa, acessível e significativa**.  
+
+> 📌 O storytelling dos dados foi o diferencial: em vez de apenas mostrar, permitiu envolver o público no processo analítico.
