@@ -1,28 +1,46 @@
-# 📊 Visualização Estatica e Interativa com diverso Tipos de Graficos: Imigração da América do Sul para o Canadá (1980–2013)
+# 📊 Análise de Imigração: Brasil para o Canadá (1980-2013)
 
-Este projeto explora o poder da visualização interativa de dados com Python e a biblioteca **Plotly**. Através de gráficos de linha interativos, analisamos a imigração de países da América do Sul para o Canadá ao longo de mais de 30 anos.
+## 🎯 O Desafio
+Como **cientista de dados**, o objetivo foi **desvendar os padrões de imigração do Brasil para o Canadá**.  
+O conjunto de dados fornecido era bruto e o desafio consistiu em **transformar números em uma história clara, cheia de insights acionáveis**.  
 
-## 📌 Objetivo
-Transformar dados de imigração em gráficos interativos que permitam **descobrir insights**, **contar histórias com dados** e **facilitar a tomada de decisões**.
+A meta não era apenas apresentar dados, mas sim **contar a jornada dos imigrantes brasileiros**, revelando tendências e picos.
 
-## 🛠️ Tecnologias Utilizadas
-- Python
-- VS Code Jupyter
-- Pandas
-- Matplotlib
-- Seaborn
-- Plotly Express
+---
 
-## 📈 O que este projeto mostra
-- Comparação entre diferentes países sul-americanos.
-- Tendências históricas de imigração ao Canadá.
-- Interatividade com filtros, zoom, tooltips e marcadores.
+## 🛠️ Tecnologias e Métodos
 
-## 🚀 Como Executar
-1. Clone este repositório.
-2. Abra o notebook no Google Colab ou Jupyter.
-3. Execute todas as células.
-4. Para salvar o gráfico interativo:
-   ```python
-   fig.write_html('imigracao_america_sul.html')
+### Linguagem de Programação
+- **Python**: Ferramenta poderosa para análise de dados e visualização.
 
+### Bibliotecas Utilizadas
+- **Pandas**: Manipulação e organização dos dados.  
+  - Carregamento do arquivo CSV, limpeza de colunas desnecessárias e transposição do DataFrame para plotagem.
+- **Matplotlib**: Criação de gráficos estáticos (linha e barras).  
+  - Útil na fase inicial, com controle granular de elementos e uso de *subplots* para comparar o Brasil com outros países sul-americanos.
+- **Seaborn**: Visualizações elegantes e atraentes com menos código.  
+  - Uso de paletas de cores (ex.: *Blues_r*, *tab10*) e temas (ex.: *whitegrid*).  
+  - Gráfico de barras horizontal para o ranking dos 10 maiores países.
+- **Plotly**: Visualizações interativas.  
+  - Gráficos dinâmicos com *hover* para ver valores exatos e filtro de países na legenda.  
+  - Transformou a visualização estática em uma ferramenta de análise exploratória.
+
+### Método Estatístico
+- **Análise Descritiva**: Estatísticas básicas (*mean*, *median*, *count*) via `describe()` do Pandas.  
+- **Boxplot**: Análise da distribuição da imigração brasileira.  
+  - Excelente para identificar dispersão, mediana e outliers.
+
+### Escolha dos Gráficos
+- **Gráfico de Linha**: Evolução temporal da imigração do Brasil (quase 30 anos).  
+  - Destaque para picos, quedas e tendências.
+- **Gráfico de Barras Horizontal**: Ranking dos 10 principais países.  
+  - Melhor leitura para rótulos longos.
+
+---
+
+## 📖 Storytelling e Insights
+
+A análise inicia com um olhar macro sobre a imigração brasileira.  
+O gráfico de linha mostra altos e baixos, mas com clara **tendência de crescimento a partir dos anos 2000**.  
+
+📌 Destaques
