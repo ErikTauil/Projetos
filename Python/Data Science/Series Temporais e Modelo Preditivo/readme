@@ -1,1 +1,112 @@
 
+# Previsão da Demanda de Aluguel de Bicicletas em Londres
+
+Este projeto de ciência de dados foi desenvolvido em **Python**, com o objetivo de analisar e prever a demanda por aluguel de bicicletas na cidade de Londres.  
+Utilizando um conjunto de dados históricos, a análise visa ajudar uma empresa de aluguel a otimizar sua frota e atender melhor a clientela, com o uso de um **modelo preditivo** para estimar a quantidade de bicicletas que serão alugadas em períodos futuros.
+
+---
+
+## 📌 Estrutura do Projeto
+
+O projeto foi dividido nas seguintes etapas:
+
+- **Carregamento e Processamento de Dados**  
+- **Análise Exploratória de Dados (AED) - Variáveis Numéricas**  
+- **Análise Exploratória de Dados (AED) - Variáveis Categóricas**  
+- **Análise Exploratória de Dados (AED) - Séries Temporais**  
+- **Construção e Avaliação do Modelo Preditivo**  
+- **Melhoria do Modelo e Previsões Futuras**
+
+---
+
+## 1. Carregamento e Processamento de Dados
+
+Nesta etapa, o foco principal foi preparar o dataset para análise.  
+
+- **Tecnologias:** A biblioteca **Pandas** foi usada para carregar e manipular o DataFrame.  
+- **Tratamento de Dados Ausentes:** 23 valores ausentes nas colunas `temperatura` e `sensacao_termica` foram preenchidos usando **interpolação linear**.  
+- **Remoção de Duplicatas:** Foram encontrados e removidos 15 registros duplicados utilizando `drop_duplicates()`.  
+
+---
+
+## 2. AED - Variáveis Numéricas
+
+O objetivo foi entender a distribuição e a relação entre as variáveis numéricas.  
+
+- **Estatísticas Descritivas:** `describe()` do Pandas forneceu panorama inicial das variáveis.  
+- **Visualização:** Histogramas e scatter plots para analisar distribuições e relações.  
+- **Correlação:** Um heatmap exibiu a matriz de correlação.  
+
+**Principais Insights:**
+- `temperatura` e `sensacao_termica` possuem correlação positiva forte (0.99).  
+- A contagem de aluguéis tem correlação **positiva** com `temperatura` (0.39) e **negativa** com `umidade` (-0.46).  
+- `velocidade_vento` teve pouca influência (0.12).  
+
+---
+
+## 3. AED - Variáveis Categóricas
+
+Exploração do impacto de clima, feriados, fins de semana e estações do ano.  
+
+- **Visualização:** Boxplots e gráficos de barras comparando distribuições.  
+- **Estatísticas:** `groupby()` para calcular medianas de aluguéis por categoria.  
+- **Teste Estatístico:** **Mann-Whitney** confirmou diferença significativa entre Primavera e Outono (p-value = 0.00047).  
+
+**Principais Insights:**
+- Maior demanda em dias úteis → uso para deslocamento.  
+- Céu limpo e parcialmente nublado → maior procura.  
+- Verão = maior demanda (mediana 1214.0) | Inverno = menor (mediana 632.0).  
+
+---
+
+## 4. AED - Séries Temporais
+
+Foco na evolução da demanda ao longo do tempo.  
+
+- **Tratamento:** Conversão da coluna `data_hora` para datetime.  
+- **Visualização:** Gráficos de linha, barras e comparações por hora, mês e tipo de dia.  
+
+**Principais Insights:**
+- Picos às **8h e 17h/18h** em dias úteis → deslocamento.  
+- Fins de semana → pico entre **12h e 15h** → lazer.  
+- Sazonalidade clara: verão com alta demanda, inverno com baixa.  
+- Eventos externos (ex.: greve do metrô em 2015) impactaram picos de aluguéis.  
+
+---
+
+## 5. Construção e Avaliação do Modelo Preditivo
+
+- **Biblioteca:** Prophet (Meta).  
+- **Preparação:** Ajuste do DataFrame (`ds` e `y`).  
+- **Divisão:** 80% treino / 20% teste.  
+- **Modelo Inicial:** Sem sazonalidade anual → RMSE = 21.590 (erro médio muito alto).  
+
+---
+
+## 6. Melhoria do Modelo e Previsões Futuras
+
+- **Ajuste de Parâmetros:** Inclusão de sazonalidade anual → RMSE caiu para 6.214.  
+- **Tratamento de Outliers:** Remoção de valores discrepantes → RMSE = 3.958.  
+- **Previsões Futuras:** Modelo aplicado para os próximos 365 dias.  
+- **Visualização Interativa:** **Plotly** usado para explorar previsões dinamicamente.  
+
+---
+
+## 📊 Conclusão
+
+Este projeto demonstrou como a **análise de dados** e a **modelagem preditiva** podem gerar insights valiosos a partir de séries temporais, ajudando empresas a **otimizar serviços** e **tomar decisões estratégicas**.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- Python  
+- Pandas  
+- Numpy  
+- Matplotlib / Seaborn  
+- Plotly  
+- Prophet (Meta)  
+- Scipy  
+
+---
+
