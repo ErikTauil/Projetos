@@ -1,1 +1,109 @@
+# Machine Learning Supervisionado: Classificação com SKLearn
 
+Este repositório apresenta uma série de projetos de **Machine Learning Supervisionado**, com foco em problemas de **classificação**.  
+O objetivo é demonstrar o processo completo de construção e avaliação de modelos, desde o carregamento dos dados até a análise dos resultados.  
+
+O projeto utiliza a biblioteca **Scikit-Learn (sklearn)** em **Python**, uma das ferramentas mais importantes e robustas para a área.
+
+---
+
+## 📌 Visão Geral do Projeto
+
+A jornada de um projeto de Machine Learning pode ser vista como um pipeline, um processo completo que abrange diversas etapas:
+
+- **Preparação dos Dados**: Carregamento, limpeza e tratamento.  
+- **Análise de Dados**: Compreensão das características e da estrutura.  
+- **Treinamento do Modelo**: Ensinar o modelo a reconhecer padrões.  
+- **Avaliação**: Medir a qualidade e a performance do modelo.  
+- **Aprimoramento**: Otimização do modelo para melhores resultados.  
+
+Ao longo dos projetos, exploramos esses passos de forma prática, utilizando exemplos claros para ilustrar os conceitos.  
+O foco é fornecer uma base sólida que permita a aplicação em diferentes cenários, adaptando o conhecimento às necessidades específicas de cada novo desafio.
+
+---
+
+## 🐷🐶 1. Classificação de Animais: O Pipeline de Aprendizado Supervisionado
+
+Este mini-projeto introduz o conceito de aprendizado supervisionado através de uma analogia simples com o aprendizado humano.  
+O objetivo é **classificar animais (porcos e cachorros)** com base em suas características, ou *features*.
+
+---
+
+## ⚙️ Metodologia e Tecnologias
+
+O projeto utiliza um **pipeline de Machine Learning** para demonstrar o fluxo de trabalho.  
+
+**Tecnologias aplicadas:**
+- Linguagem: **Python**
+- Ambiente: **VS Code**
+- Biblioteca: **Scikit-Learn (sklearn)**
+
+---
+
+## 🔎 O Processo de Classificação
+
+O problema é modelado como uma **classificação binária**, onde cada animal pertence a uma de duas classes: **porco** ou **cachorro**.  
+
+**Features utilizadas:**
+- Pelo longo (1: sim, 0: não)  
+- Perna curta (1: sim, 0: não)  
+- Faz "au-au" (1: sim, 0: não)  
+
+---
+
+## 🖥️ O Código e o Treinamento
+
+O projeto foi implementado com as seguintes etapas:
+
+1. **Definição dos Dados**  
+   - As features de cada animal foram armazenadas em listas (`porco1 = [0, 1, 0]`).  
+   - Uma lista principal (`dados`) agrupou todas as features.  
+   - Uma lista separada (`classes`) continha os rótulos (1 = porco, 0 = cachorro).  
+   - Para padronização, as variáveis foram renomeadas para `treino_x` e `treino_y`.  
+
+2. **Criação e Treinamento do Modelo**  
+   - Utilização da classe `LinearSVC` da biblioteca `sklearn.svm`.  
+   - O método `.fit()` foi chamado para treinar o modelo.  
+
+3. **Realização de Previsões**  
+   - Novos dados (`teste_x`) foram submetidos ao modelo.  
+   - O método `.predict()` foi usado para prever a classe.  
+   - Rótulos verdadeiros foram armazenados em `teste_y`.  
+
+4. **Avaliação da Performance**  
+   - A **acurácia** foi calculada manualmente e com a função `accuracy_score()` do `sklearn.metrics`.  
+
+---
+
+## 📊 O Método Estatístico e as Métricas
+
+O método estatístico aplicado é a **classificação supervisionada**.  
+Neste projeto, foi utilizado o **LinearSVC**, baseado em **Support Vector Machine (SVM)**.  
+
+- O SVM busca encontrar o **melhor hiperplano** para separar as classes.  
+- É especialmente eficaz em problemas com poucas features.  
+
+**Métrica utilizada:**
+- **Acurácia**: proporção de acertos do modelo.  
+
+Exemplo: O modelo alcançou uma **acurácia de 66,67%**, mostrando que conseguiu aprender a maior parte dos padrões.
+
+---
+
+## 📖 Insights e Storytelling
+
+O processo de Machine Learning supervisionado pode ser compreendido como um ciclo de aprendizado:  
+
+Imagine que você é um **professor** e o computador é seu **aluno**.  
+- Você mostra fotos de animais (dados), dizendo quais são porcos e quais são cachorros (classes).  
+- O aluno aprende os padrões (treinamento).  
+- Depois, você dá uma "prova" com novas fotos (teste).  
+- O aluno responde e você corrige (avaliação com acurácia).  
+
+📌 Resultado:  
+O modelo obteve **66,67% de acertos**.  
+Isso significa que, apesar de não ser perfeito, ele já consegue diferenciar porcos de cachorros em boa parte dos casos.  
+
+➡️ O próximo passo é **otimizar** o modelo para que ele alcance uma "nota" ainda melhor.  
+
+---
