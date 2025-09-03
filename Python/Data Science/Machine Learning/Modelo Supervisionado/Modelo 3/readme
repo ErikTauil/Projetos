@@ -1,1 +1,90 @@
+# Análise e Classificação de Projetos Freelancer
 
+Este projeto explora a aplicação de modelos de **Machine Learning** para prever a probabilidade de um projeto freelancer ser concluído, com base em duas variáveis principais:  
+- número de horas estimadas  
+- preço proposto pelo cliente  
+
+A análise abrange desde a exploração inicial dos dados até a construção, treinamento e avaliação de modelos de classificação, com foco especial na **normalização de dados** e na **escolha do modelo apropriado para relações não lineares**.
+
+---
+
+## Tecnologias e Bibliotecas Utilizadas
+- **Python**: Linguagem de programação principal  
+- **Pandas**: Manipulação e análise de dados (leitura do `.csv`, limpeza e transformações)  
+- **NumPy**: Operações numéricas (especialmente para criar a grade de visualização da curva de decisão)  
+- **Matplotlib e Seaborn**: Visualização de dados (gráficos de dispersão e curvas de decisão)  
+- **Scikit-learn**: Machine Learning  
+  - `train_test_split`: divisão dos dados em treino e teste  
+  - `LinearSVC` e `SVC`: modelos de classificação  
+  - `accuracy_score`: métrica de avaliação (acurácia)  
+  - `StandardScaler`: normalização dos dados  
+
+---
+
+## 1. Explorando os Dados e Manipulação
+
+O projeto utiliza o arquivo `projetos.csv`, contendo informações sobre projetos freelancer.  
+
+**Colunas analisadas:**
+- `nao_finalizado`: binária (0 = concluído, 1 = não concluído)  
+- `horas_esperadas`: número de horas estimadas  
+- `preco`: valor proposto  
+
+🔄 **Transformação inicial**:  
+A coluna `nao_finalizado` foi invertida e renomeada para `finalizado`, onde:  
+- `1` = concluído  
+- `0` = não concluído  
+
+---
+
+## Análise Estatística e Gráfica
+
+Para entender a relação entre **preço** e **horas esperadas**, foi usado um **gráfico de dispersão (Seaborn)**.  
+
+### Insights:
+- Correlação positiva: projetos com mais horas tendem a ter preços maiores.  
+- Concentração de projetos com `horas_esperadas = 0` → removidos com `query()`.  
+- Inclusão da variável `finalizado` no `hue`:  
+  - Projetos finalizados → geralmente mais horas e preços mais altos.  
+  - Projetos não finalizados → mais dispersos e em faixas menores de horas/preço.  
+
+---
+
+## 2. Modelos de Classificação: Linear vs. Não Linear
+
+### 🔹 Modelo Linear (LinearSVC)
+- **Acurácia**: ~62,41%  
+- **Limitação**: curva de decisão reta → incapaz de capturar relações não-lineares  
+- **Comparação com baseline**: modelo base (52,59%) que previa todos como finalizados  
+
+---
+
+### 🔹 Modelo Não Linear (SVC - Support Vector Machine)
+
+#### Normalização de Dados
+- Aplicado **StandardScaler** para reescalar as variáveis:  
+  - `horas_esperadas` (0–100)  
+  - `preco` (0–30.000)  
+- Normalização evitou que o preço tivesse peso desproporcional no modelo.  
+
+#### Performance após normalização:
+- **Acurácia**: ~68,52%  
+- **Análise**: curva de decisão não linear, mais curva e precisa, refletindo melhor os padrões dos dados.  
+
+---
+
+## 📖 Storytelling: A Jornada da Previsão
+
+Imagine um **desenvolvedor freelancer** que acumulou dados sobre seus projetos.  
+
+- Ele percebe que alguns projetos são concluídos com sucesso, outros ficam parados.  
+- Primeiro, tenta um modelo linear: simples demais, traçando uma linha reta e errando muitas previsões.  
+- Depois, experimenta o **SVM**: mais sofisticado, mas ainda confuso devido às escalas diferentes de horas e preço.  
+- Ao aplicar a **normalização**, o modelo finalmente "enxerga" o padrão real.  
+
+✨ Resultado:  
+O modelo alcança **68,52% de acurácia**, ajudando o freelancer a decidir melhor quais projetos aceitar, economizando tempo e aumentando as chances de sucesso.  
+
+> A lição: A verdadeira eficácia do Machine Learning não está apenas em escolher o modelo mais avançado, mas em **preparar os dados corretamente** para que o modelo aprenda da melhor forma.
+
+---
