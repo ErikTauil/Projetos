@@ -1,1 +1,32 @@
 
+Projeto de Análise e Classificação de Dados de Navegação
+
+Este projeto tem como objetivo principal a prática e o refinamento de um pipeline de aprendizado de máquina, utilizando um conjunto de dados sobre o comportamento de usuários em um website de eventos. O foco é prever se um usuário irá comprar ou não um ingresso para um evento de inteligência artificial, baseado em sua navegação no site. O modelo desenvolvido será aplicado para otimizar a exibição de anúncios, garantindo que sejam mostrados apenas para usuários com menor probabilidade de compra, a fim de não atrapalhar a experiência dos demais.
+
+💻 Tecnologias e Bibliotecas Utilizadas
+ * Python: A linguagem de programação principal.
+ * pandas: Utilizada para manipulação e análise de dados, incluindo a leitura e visualização do arquivo CSV.
+ * scikit-learn: Uma biblioteca robusta de aprendizado de máquina em Python. As principais funções e classes utilizadas foram:
+   * LinearSVC: O modelo de classificação utilizado para prever a compra de ingressos.
+   * train_test_split: Função essencial para dividir o conjunto de dados em subconjuntos de treino e teste, prevenindo o problema de overfitting.
+   * accuracy_score: Métrica de avaliação de desempenho para calcular a acurácia do modelo.
+
+📈 Metodologia e Análise Estatística
+O projeto adota uma abordagem de aprendizado de máquina supervisionado para resolver um problema de classificação binária (comprou ou não comprou).
+Pré-processamento e Divisão dos Dados
+ * Leitura do Dataset: O conjunto de dados, contido no arquivo tracking.csv, foi lido diretamente de uma URL utilizando a biblioteca pandas.
+ * Seleção de Features e Target:
+   * Features (X): As variáveis de entrada para o modelo, que consistem nas colunas de navegação: inicial, palestras, contato e patrocinio.
+   * Target (y): A variável de saída que o modelo deve prever, a coluna comprou.
+ * Divisão Estratificada: O método train_test_split foi empregado para dividir o dataset em um conjunto de treino e um conjunto de teste. A estratificação foi aplicada para garantir que a proporção de usuários que compraram e não compraram fosse a mesma em ambos os conjuntos, evitando vieses e garantindo que o modelo seja treinado com uma representação balanceada das classes. A random_state (semente) foi fixada para garantir a reprodutibilidade da análise.
+Treinamento e Avaliação do Modelo
+ * Modelo de Classificação: O algoritmo LinearSVC (Support Vector Classifier) foi escolhido por sua eficácia em problemas de classificação, sendo treinado com o conjunto de dados de treino (treino_x e treino_y).
+ * Cálculo da Acurácia: O desempenho do modelo foi avaliado usando a acurácia, que mede a proporção de previsões corretas. Este método foi escolhido por ser uma métrica clara e direta, adequada para este problema de classificação.
+
+💡 Insights e Storytelling
+O projeto se baseia em uma necessidade de negócio comum: a otimização da experiência do usuário.
+Imagine que o site do evento é como um vendedor virtual. Ele observa o comportamento dos visitantes: se eles apenas olham a página inicial, se exploram a lista de palestras, ou se procuram a página de contato. Alguns visitantes parecem estar realmente interessados, enquanto outros apenas dão uma olhada rápida. O objetivo é que o vendedor só aborde os visitantes que parecem indecisos, oferecendo ajuda extra, como uma mensagem de "Olá! Gostaria de conversar para entender se faz sentido para você comprar o ingresso?".
+
+O modelo de aprendizado de máquina atua como esse "vendedor virtual", mas de forma preditiva. Em vez de esperar que o usuário fique indeciso, o modelo tenta prever a intenção de compra com base nos padrões de navegação dos usuários anteriores.
+
+Os resultados foram promissores, com uma acurácia superior a 95%. Isso significa que o modelo é capaz de prever corretamente a intenção de compra da grande maioria dos usuários, permitindo que a equipe de marketing exiba anúncios de forma direcionada, maximizando a chance de conversão sem prejudicar a navegação dos usuários que já estão prontos para comprar.
