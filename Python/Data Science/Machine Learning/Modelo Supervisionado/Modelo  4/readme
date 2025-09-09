@@ -69,10 +69,9 @@ O modelo de árvore de decisão foi escolhido pela performance e pela capacidade
 
 ---
 
-## 📝 Exemplo de Storytelling
-
-Imagine-se como um **consultor de uma plataforma de venda de carros**.  
-Seu desafio é ajudar usuários a definir o preço ideal para seus veículos.  
+## 📝 
+Como um **consultor de uma plataforma de venda de carros**.  
+o desafio é ajudar usuários a definir o preço ideal para seus veículos.  
 
 Com este projeto:  
 - O sistema analisa dados de carros vendidos e não vendidos.  
