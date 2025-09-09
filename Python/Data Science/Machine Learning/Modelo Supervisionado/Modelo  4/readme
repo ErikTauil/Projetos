@@ -1,1 +1,87 @@
-readme Dummmy Classifiers
+# Dummy Classifiers e Árvores de Decisão
+
+Este projeto explora a criação e avaliação de modelos de classificação para prever a venda de carros usados.  
+A análise é baseada em um conjunto de dados sintético e aborda desde o tratamento inicial dos dados até a aplicação de diferentes algoritmos de Machine Learning.
+
+---
+
+## 🚀 Tecnologias e Bibliotecas Utilizadas
+
+- **Python**: Linguagem de programação principal.  
+- **Pandas**: Usada para manipulação e análise dos dados, criando e editando DataFrames.  
+- **Scikit-learn (sklearn)**: Biblioteca fundamental para a construção dos modelos de Machine Learning. Foram utilizadas as seguintes classes e módulos:
+  - `train_test_split`: Para dividir o conjunto de dados em subconjuntos de treino e teste.
+  - `StandardScaler`: Para padronizar as variáveis.
+  - `LinearSVC`: Um algoritmo de classificação baseado em máquinas de vetores de suporte (SVM).
+  - `SVC`: Outro tipo de classificador SVM.
+  - `DecisionTreeClassifier`: Um algoritmo de árvore de decisão.
+  - `DummyClassifier`: Um classificador de linha de base (baseline) para comparação de performance.
+  - `accuracy_score`: Para calcular a acurácia dos modelos.
+  - `export_graphviz`: Para gerar a representação gráfica da árvore de decisão.
+- **Graphviz**: Biblioteca para a visualização da árvore de decisão, transformando o código gerado pelo `export_graphviz` em uma imagem.  
+- **Datetime**: Módulo para lidar com datas e anos, usado para calcular a idade dos veículos.
+
+---
+
+## 📊 Análise e Insights
+
+A jornada deste projeto começou com a exploração e o tratamento de um conjunto de dados de carros usados, contendo informações como milhas por ano, ano do modelo, preço e status de venda.
+
+### 🔧 Tratamento de Dados
+- **Conversão de Unidades**: A coluna `milhas_por_ano` foi convertida para `km_por_ano` (1 milha = 1.60934 km).  
+- **Cálculo da Idade do Veículo**: A coluna `ano_do_modelo` foi usada para calcular a idade do carro.  
+- **Remoção de Colunas**: Foram removidas `milhas_por_ano` e `ano_do_modelo`, resultando em um DataFrame com as variáveis: `preco`, `idade`, `km_por_ano` e `vendido`.
+
+---
+
+## 📌 O Papel dos Dummy Classifiers (Baseline)
+
+Antes de aplicar modelos complexos, foi essencial estabelecer uma **linha de base**.  
+O **DummyClassifier** é um método estatístico simples que serve a esse propósito.
+
+- Acurácia com `most_frequent`: **58%** (corresponde à proporção de carros vendidos no dataset).  
+- Acurácia com `stratified`: **49%**.  
+
+💡 **Insight**: Qualquer modelo que não superasse **58%** seria considerado inútil.  
+
+---
+
+## ⚖️ Comparação de Modelos de Classificação
+
+Três modelos foram aplicados:
+
+- **LinearSVC** → Acurácia: **69.92%**  
+- **SVC** → Acurácia: **75.92%**  
+- **DecisionTreeClassifier (max_depth=3)** → Acurácia: **78.40%**
+
+💡 **Insight**: O *DecisionTreeClassifier* se mostrou o mais eficaz, superando inclusive o baseline.
+
+---
+
+## 🌳 Árvores de Decisão (Decision Trees)
+
+O modelo de árvore de decisão foi escolhido pela performance e pela capacidade de **explicar decisões**.
+
+- **Método Estatístico**: Divide o dataset em subconjuntos, criando nós de decisão e nós folha.  
+- **Visualização**: Gerada com `Graphviz`, mostrando regras lógicas baseadas em preço, idade e km.  
+- **Controle de Complexidade**: `max_depth=3` → modelo mais compreensível e evita *overfitting*.  
+- **Interpretação**: Mantida sem padronização (`StandardScaler`) para manter valores reais (preço, idade, km).
+
+---
+
+## 📝 Exemplo de Storytelling
+
+Imagine-se como um **consultor de uma plataforma de venda de carros**.  
+Seu desafio é ajudar usuários a definir o preço ideal para seus veículos.  
+
+Com este projeto:  
+- O sistema analisa dados de carros vendidos e não vendidos.  
+- Considera **preço, idade e quilometragem**.  
+- Usa uma **Árvore de Decisão** como se fosse um especialista que segue regras lógicas:  
+  - "Se o preço < X, verifique a idade."  
+  - "Se a idade < Y, verifique a quilometragem."  
+  - Conclusão → “Alta probabilidade de venda” ou “Baixa probabilidade de venda”.
+
+📌 Essa abordagem fornece **a resposta e o raciocínio** por trás dela → tornando o modelo transparente e útil para vendedores.
+
+---
