@@ -1,4 +1,3 @@
-
 # Análise e Segmentação de Consumidores por Meio de Aprendizado de Máquina
 
 Este projeto tem como objetivo principal segmentar uma base de consumidores de uma empresa de consultoria e marketing, agrupando-os de acordo com seus interesses.  
@@ -7,85 +6,48 @@ A segmentação é crucial para criar campanhas de marketing mais eficazes e per
 
 O projeto utiliza técnicas de **aprendizado de máquina não supervisionado**, especificamente a **clusterização (clustering)**, para identificar padrões em dados não rotulados e categorizar os consumidores de forma eficiente.  
 
-Todo o desenvolvimento foi realizado utilizando a linguagem de programação **Python** e as bibliotecas **Pandas** e **Scikit-Learn**.
+Todo o desenvolvimento foi realizado utilizando a linguagem **Python** e as bibliotecas **Pandas** e **Scikit-Learn**.
 
 ---
 
-## 📂 Projetos Contidos no Repositório
+## Projetos Contidos no Repositório
 
-Este repositório é composto por **três etapas principais**, que podem ser consideradas como miniprojetos interconectados, cada um focando em um aspecto crucial do desenvolvimento do modelo.
+Este repositório é composto por três etapas principais, que podem ser consideradas como miniprojetos interconectados, cada um focando em um aspecto crucial do desenvolvimento do modelo.
 
 ---
 
 ### 1. Pré-processamento e Transformação de Dados
 
-Nesta etapa, os dados foram preparados para a modelagem. O conjunto de dados original continha informações sobre consumidores, como idade, número de amigos e a frequência com que mencionavam certos temas em redes sociais.
+Nesta etapa, os dados foram preparados para a modelagem.  
+O conjunto de dados original continha informações sobre consumidores, como idade, número de amigos e a frequência com que mencionavam certos temas em redes sociais.
 
-#### 🛠️ Tecnologias Utilizadas:
-- **Pandas**: Para manipulação e análise dos dados.  
-  - Função `df.info()` para inspecionar a estrutura do DataFrame e identificar colunas com tipos de dados incorretos (ex: coluna `sexo`).
-- **Scikit-Learn**: Para a transformação de dados.  
-  - `OneHotEncoder` aplicado para converter a coluna categórica `sexo` (`'F'`, `'M'`, `'NE'`) em colunas numéricas (`'sexo_F'`, `'sexo_M'`, `'sexo_NE'`).
+**Tecnologias Utilizadas**
+- **Pandas**: Manipulação e análise dos dados.  
+  - Exemplo: `df.info()` para inspecionar a estrutura do DataFrame.  
+- **Scikit-Learn**: Transformação de dados.  
+  - Exemplo: `OneHotEncoder` para converter a coluna categórica **sexo** em três colunas numéricas (`sexo_F`, `sexo_M`, `sexo_NE`).
 
-#### 💡 Insights:
-- Os dados iniciais apresentavam **colunas com escalas muito diferentes** (ex: idade e número de amigos), o que prejudicava o modelo de clusterização baseado em distâncias.
-- A **normalização** foi essencial para garantir que todas as características estivessem na mesma escala (0 a 1).  
-- O método **MinMaxScaler** foi utilizado para essa tarefa.
+**Insights**
+- Colunas com escalas muito diferentes (ex: idade e número de amigos) prejudicariam a clusterização.  
+- Foi aplicada a **normalização** com `MinMaxScaler`, colocando todas as variáveis na mesma escala (0 a 1).
 
 ---
 
 ### 2. Modelagem e Avaliação de Clusterização
 
-Após o pré-processamento, o modelo de clusterização **K-Means** foi desenvolvido. A modelagem inicial com 2 clusters não produziu bons resultados, exigindo análise mais aprofundada.
+Após o pré-processamento, o modelo de **clusterização K-Means** foi desenvolvido.  
 
-#### 📊 Métodos Estatísticos e Gráficos:
-- **K-Means**: Agrupou consumidores por similaridade de interesses, criando clusters de perfis semelhantes.  
-- **Método do Cotovelo (Elbow Method)**: Utilizado para encontrar a quantidade ideal de clusters `k`, analisando a inércia.  
-- **Gráfico de Silhueta (Silhouette Plot)**: Validou a qualidade dos clusters, avaliando coesão e separação.
+**Método Estatístico e Gráficos**
+- **K-Means**: Agrupou consumidores por similaridade de interesses.  
+- **Método do Cotovelo (Elbow Method)**: Identificação da quantidade ideal de clusters.  
+- **Gráfico de Silhueta (Silhouette Plot)**: Validou a qualidade dos clusters.
 
-#### 💡 Insights:
-- Com **2 clusters**, o valor de silhueta médio foi baixo (~0.38) e a inércia alta → **agrupamentos ruins**.  
-- Após a **normalização**, o método do cotovelo e o gráfico de silhueta indicaram **3 clusters como ideais**, com valor de silhueta médio próximo a **0.74**.  
-- A escala dos dados era o principal fator que prejudicava o desempenho inicial.
+**Insights**
+- Com **2 clusters**, o valor médio de silhueta foi baixo (~0.38) e a inércia alta.  
+- Após a normalização, **3 clusters** se mostraram ideais, com valor médio de silhueta de **0.74**, confirmando a melhora na qualidade da segmentação.
 
 ---
 
 ### 3. Análise e Storytelling dos Clusters
 
-A etapa final focou na **interpretação dos resultados**.  
-As características de cada cluster foram analisadas, revertendo a normalização para facilitar a leitura.
-
-#### 📌 Análise:
-- `groupby().mean().T` → comparação das médias de cada cluster.  
-- `sort_values(ascending=False)` → identificação e ordenação dos interesses mais relevantes.
-
-#### 📖 Storytelling (Resultados da Segmentação):
-
-O modelo **K-Means com 3 clusters** revelou três perfis distintos de consumidores:
-
-- **Cluster 0: "Aficionados por Estilo e Entretenimento"**  
-  - Majoritariamente feminino.  
-  - Forte interesse em música, cabelo, dança e compras.  
-  - **Campanhas ideais:** produtos de beleza, vestuário, parcerias com influenciadores de moda e música.
-
-- **Cluster 1: "Entusiastas de Esportes e Cultura"**  
-  - Composto principalmente por homens.  
-  - Interesse em música, futebol americano, basquete e beisebol.  
-  - **Campanhas ideais:** produtos esportivos, eventos esportivos e musicais.
-
-- **Cluster 2: "Conectados e Diversificados"**  
-  - Grupo que não declarou gênero.  
-  - Interesses equilibrados em música, dança, cabelo e compras.  
-  - **Campanhas ideais:** inclusivas, focadas em lifestyle, moda, beleza e música.
-
----
-
-## ✅ Conclusão
-
-Este projeto demonstra como o **aprendizado de máquina não supervisionado** pode ser uma ferramenta poderosa para **segmentação de mercado**.  
-
-Ao identificar perfis de consumidores com precisão, a empresa pode criar campanhas mais direcionadas, aumentando a eficácia e o ROI.  
-
-Além disso, o modelo final (`kmeans.pkl`) e os transformadores (`encoder.pkl` e `scaler.pkl`) foram disponibilizados para que a equipe de marketing aplique em **novos dados**, garantindo **continuidade e escalabilidade** da estratégia.
-
----
+A etapa final focou na interpretação dos resultados do modelo, revertendo a normalização
