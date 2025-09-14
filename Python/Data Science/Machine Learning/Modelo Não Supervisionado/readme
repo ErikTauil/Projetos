@@ -50,4 +50,95 @@ Após o pré-processamento, o modelo de **clusterização K-Means** foi desenvol
 
 ### 3. Análise e Storytelling dos Clusters
 
-A etapa final focou na interpretação dos resultados do modelo, revertendo a normalização
+A etapa final focou na interpretação dos resultados do modelo, revertendo a normalização para facilitar a leitura.  
+
+**Análise**
+- Uso de `groupby().mean().T` para transpor tabelas e comparar médias.  
+- `sort_values(ascending=False)` para identificar interesses mais relevantes.  
+
+**Storytelling (Resultados da Segmentação)**  
+O modelo **K-Means (3 clusters)** revelou três perfis distintos de consumidores:
+
+- **Cluster 0: "Aficionados por Estilo e Entretenimento"**  
+  - Grupo majoritariamente feminino.  
+  - Interesses: música, cabelo, dança, compras.  
+  - Campanhas ideais: produtos de beleza, vestuário, influenciadores de moda e música.
+
+- **Cluster 1: "Entusiastas de Esportes e Cultura"**  
+  - Composto principalmente por homens.  
+  - Interesses: música, futebol americano, basquete, beisebol.  
+  - Campanhas ideais: produtos esportivos, eventos esportivos e musicais.
+
+- **Cluster 2: "Conectados e Diversificados"**  
+  - Grupo com gênero não declarado.  
+  - Interesses equilibrados em música, dança, cabelo e compras.  
+  - Campanhas ideais: inclusivas, focadas em lifestyle, moda e beleza.
+
+---
+
+### 4. Disponibilização da Aplicação Web com Streamlit
+
+Para facilitar o uso pela equipe de marketing, o modelo foi disponibilizado como uma aplicação web interativa.
+
+**Tecnologias Utilizadas**
+- **Streamlit**: Construção da interface web.  
+- **Joblib**: Carregamento dos objetos do modelo (`kmeans.pkl`, `scaler.pkl`, `encoder.pkl`).  
+- **Python venv**: Criação de ambiente virtual isolado com dependências em `requirements.txt`.
+
+**Fluxo da Aplicação**
+1. Apresentação de título e descrição do projeto.  
+2. Upload de arquivo CSV com novos dados.  
+3. Processamento com codificador e normalizador.  
+4. Previsão dos grupos pelo modelo K-Means.  
+5. Exibição do DataFrame com grupos adicionados.  
+6. Descrição detalhada dos clusters.  
+7. Disponibilização de download do CSV segmentado.
+
+---
+
+## Conclusão Geral do Projeto
+
+Este projeto demonstra como o **aprendizado de máquina não supervisionado** pode ser uma ferramenta poderosa para **segmentação de mercado**.  
+
+Ao identificar e descrever perfis de consumidores de forma precisa, a empresa pode criar campanhas mais direcionadas, aumentando a eficácia e o **ROI**.  
+
+A disponibilização do modelo em uma aplicação web garante acessibilidade e escalabilidade, cumprindo os três objetivos do projeto:  
+1. Construir o modelo.  
+2. Identificar interesses.  
+3. Disponibilizar a ferramenta para uso da equipe.  
+
+---
+
+## 🚀 Como Executar o Projeto
+
+Siga as instruções abaixo para rodar o projeto localmente:
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+
+2. Crie e ative o ambiente virtual
+
+python -m venv venv
+# Ativar no Windows
+venv\Scripts\activate
+# Ativar no Linux/Mac
+source venv/bin/activate
+
+3. Instale as dependências
+
+pip install -r requirements.txt
+
+4. Execute a aplicação Streamlit
+
+streamlit run app.py
+
+Acesse a aplicação no navegador pelo endereço:
+
+http://localhost:8501
+
+
+---
+
+
