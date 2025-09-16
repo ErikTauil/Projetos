@@ -1,1 +1,71 @@
 
+# Análise de Sentimento de Avaliações de E-commerce
+
+## Descrição
+Este projeto de análise de sentimento tem como objetivo classificar automaticamente as avaliações de clientes de um e-commerce como positivas ou negativas. A partir de um conjunto de dados com milhares de avaliações textuais, foi criado um modelo de Machine Learning capaz de extrair insights valiosos, auxiliando a empresa na tomada de decisões estratégicas.
+
+A automação da classificação de sentimentos permite que o e-commerce identifique rapidamente quais produtos agradam ou desagradam os clientes, otimizando o marketing para produtos bem avaliados e direcionando esforços para melhorias naqueles com feedback negativo.
+
+---
+
+## Tecnologias e Bibliotecas Utilizadas
+Este projeto foi desenvolvido utilizando Python no ambiente VS Code Python. As principais bibliotecas utilizadas foram:
+
+- **Pandas**: Para a manipulação e análise dos dados em formato de DataFrame.  
+- **NLTK (Natural Language Toolkit)**: Uma das bibliotecas mais poderosas para o Processamento de Linguagem Natural (PLN). Utilizada para tokenização (separação de palavras), remoção de stopwords e aplicação de stemming (redução das palavras ao seu radical).  
+- **Scikit-learn**: Para a criação e treinamento do modelo de Machine Learning, incluindo a separação dos dados em conjuntos de treino e teste, e a implementação da Regressão Logística.  
+- **Matplotlib e Seaborn**: Para a criação de visualizações de dados, como gráficos de barras.  
+- **Word Cloud**: Para a geração de nuvens de palavras, que oferecem uma visualização intuitiva das palavras mais frequentes.  
+- **Unidecode**: Para a remoção de acentuações do texto.  
+
+---
+
+## Etapas do Projeto
+
+### 1. Preparação e Exploração dos Dados
+O ponto de partida foi o carregamento do conjunto de dados `dataset_avaliacoes.csv` com a biblioteca Pandas.  
+A exploração inicial revelou informações como:
+- A quantidade total de avaliações (15.501).  
+- A distribuição entre avaliações positivas e negativas.  
+- O conteúdo das avaliações.  
+
+### 2. Pré-processamento e Limpeza do Texto
+Etapa crucial para o sucesso do modelo. Técnicas aplicadas:  
+- **Tokenização**: O texto de cada avaliação foi dividido em palavras (tokens).  
+- **Remoção de stopwords**: Palavras irrelevantes para a análise de sentimento foram eliminadas.  
+- **Remoção de pontuação e números**.  
+- **Normalização de acentuação** (ex: "ótimo" → "otimo").  
+- **Uniformização de caixa**: todas as palavras em minúsculas.  
+- **Stemming**: Redução das palavras ao radical (ex: "gostei", "gostado" → "gost").  
+
+### 3. Vetorização e Engenharia de Features
+Os textos foram convertidos em representações numéricas:  
+- **Bag of Words**.  
+- **TF-IDF (Term Frequency-Inverse Document Frequency)**: mais eficaz para este projeto.  
+
+Também foi utilizada a técnica de **N-grams**, especificamente os **bigrams** `(ngram_range=(1, 2))`, capturando contextos como "produto ruim" ou "ótimo produto".  
+
+### 4. Modelagem e Treinamento
+- O algoritmo escolhido foi a **Regressão Logística** para classificação binária.  
+- Os dados foram divididos em treino e teste utilizando `train_test_split`.  
+
+---
+
+## Resultados e Insights
+- O modelo de Regressão Logística com TF-IDF e N-grams alcançou **91,85% de acurácia** no conjunto de teste.  
+- **Palavras Positivas**: "ótimo", "excelente", "bom", "perfeito", "ótimo produto", "produto excelente".  
+- **Palavras Negativas**: "péssimo", "ruim", "horrível", "defeito", "péssima qualidade", "baixa qualidade".  
+
+As nuvens de palavras e gráficos de barras ajudaram a visualizar a importância das transformações no texto, revelando termos-chave como "produto", "bom" e "entrega".  
+
+---
+
+## Conclusão (Storytelling)
+Era uma vez um e-commerce que recebia milhares de avaliações de clientes todos os meses.  
+Em meio ao vasto mar de textos, os gestores sentiam-se perdidos, incapazes de entender rapidamente o que os clientes amavam ou odiavam. A tomada de decisão era lenta e baseada em suposições. A empresa precisava de um farol para navegar nesse oceano de dados.
+
+Foi então que este projeto nasceu. Nossa missão era construir esse farol: um modelo inteligente capaz de ler cada avaliação e, em um piscar de olhos, classificar seu sentimento. Começamos com os dados brutos, limpamos e polimos cada texto, removendo o ruído e deixando apenas o que importava. Transformamos palavras em números e ensinamos o modelo a diferença entre "bom produto" e "produto ruim".
+
+O resultado foi um sucesso! Com uma acurácia de quase **92%**, o farol está pronto. Ele pode agora escanear todas as novas avaliações, em tempo real, e enviar insights claros para a equipe.  
+
+O e-commerce finalmente tem o poder de entender seus clientes profundamente, otimizar produtos, criar campanhas de marketing mais eficazes e construir relacionamentos mais fortes e transparentes.  
