@@ -61,7 +61,7 @@ As nuvens de palavras e gráficos de barras ajudaram a visualizar a importância
 ---
 
 ## Conclusão (Storytelling)
-Era uma vez um e-commerce que recebia milhares de avaliações de clientes todos os meses.  
+e-commerce que recebia milhares de avaliações de clientes todos os meses.  
 Em meio ao vasto mar de textos, os gestores sentiam-se perdidos, incapazes de entender rapidamente o que os clientes amavam ou odiavam. A tomada de decisão era lenta e baseada em suposições. A empresa precisava de um farol para navegar nesse oceano de dados.
 
 Foi então que este projeto nasceu. Nossa missão era construir esse farol: um modelo inteligente capaz de ler cada avaliação e, em um piscar de olhos, classificar seu sentimento. Começamos com os dados brutos, limpamos e polimos cada texto, removendo o ruído e deixando apenas o que importava. Transformamos palavras em números e ensinamos o modelo a diferença entre "bom produto" e "produto ruim".
