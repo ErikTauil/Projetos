@@ -19,40 +19,6 @@ Este projeto é um **dashboard interativo** desenvolvido em **Python com Dash**,
 
 ## Estrutura do Projeto
 
-├── app.py              # Declaração da variável app
-├── main.py             # Ponto de entrada do dashboard
-├── paginas
-│   ├── init.py     # Importação das páginas
-│   ├── graficos.py     # Página de gráficos
-│   └── formulario.py   # Página de formulário
-├── assets
-│   └── main.css        # Arquivos de estilo CSS
-├── modelo_xgboost.pkl  # Modelo treinado
-├── medianas.pkl        # Medianas para preenchimento de valores nulos
-└── README.md
-
-
-Com certeza! Aqui está o arquivo README.md formatado para o GitHub, com todo o código Python removido, mantendo apenas o texto original e a estrutura do projeto.
-# Dashboard de Previsão de Doença Cardíaca
-
-Este projeto é um **dashboard interativo** desenvolvido em **Python com Dash**, destinado a prever a possibilidade de **doença cardíaca** a partir de dados do usuário. O sistema possui páginas de gráficos e formulário, permitindo visualização e interação em tempo real com o modelo de machine learning.
-
----
-
-## Tecnologias Utilizadas
-
-* **Python 3.x**
-* **Dash:** Framework web para criação de dashboards interativos.
-* **Dash Bootstrap Components (DBC):** Componentes estilizados com Bootstrap.
-* **Pandas / NumPy:** Manipulação de dados.
-* **Joblib:** Carregamento de modelos treinados (XGBoost).
-* **XGBoost:** Modelo de machine learning utilizado para previsão.
-* **HTML / CSS:** Estrutura básica do layout (via Dash e CSS externo).
-
----
-
-## Estrutura do Projeto
-
 
 ├── app.py              # Declaração da variável app
 ├── main.py             # Ponto de entrada do dashboard
