@@ -36,7 +36,7 @@ Utilizamos o conjunto de dados **Fashion-MNIST**, criado pelo grupo **Zalando Re
 Um passo crucial para o treinamento eficaz da rede neural foi a **normalização dos pixels**.
 
 - **O Desafio:** Os valores dos pixels variavam de 0 a 255 (escala de cinza). Essa grande amplitude numérica dificulta o processamento inicial pela rede, resultando em uma perda inicial muito alta (13.10).  
-- **A Solução:** Dividimos todos os valores de pixel das imagens de treino e teste por **255.0**.  
+- **A Solução:** Dividi todos os valores de pixel das imagens de treino e teste por **255.0**.  
 - **Impacto:** A normalização reduziu o intervalo dos dados para **0 e 1 (ponto flutuante)**, fazendo a perda despencar de **13.10 para 0.48**, estabilizando o processo de aprendizado.
 
 ---
