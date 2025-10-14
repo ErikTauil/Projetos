@@ -1,0 +1,149 @@
+
+# 👕 Classificação Automática de Imagens de Roupas com Deep Learning
+
+Este projeto aborda a aplicação de **Redes Neurais Profundas (Deep Learning)** para resolver um problema de **classificação automática de imagens**.  
+O cenário é um **e-commerce de vestuário** que busca classificar automaticamente as imagens de seus produtos (camisetas, botas, saias, etc.) no momento em que são carregadas na plataforma.
+
+O objetivo principal é **construir, otimizar e avaliar um modelo de Deep Learning** capaz de identificar e categorizar corretamente os itens de vestuário.
+
+---
+
+## ⚙️ Tecnologias e Bibliotecas Utilizadas
+
+| Tecnologia | Descrição |
+|-------------|------------|
+| **Python** | Linguagem de programação principal. |
+| **TensorFlow** | Biblioteca do Google para Redes Neurais e operações de baixo nível. |
+| **Keras** | API de alto nível construída sobre o TensorFlow, utilizada para definir e treinar modelos de forma simplificada. |
+| **NumPy** | Biblioteca essencial para manipulação eficiente de vetores, matrizes e arrays de dados (como as imagens e seus pixels). |
+| **Matplotlib.pyplot** | Utilizada para visualização de dados, exibição de imagens e plotagem de gráficos de desempenho do modelo. |
+
+---
+
+## 🧵 O Dataset Fashion-MNIST
+
+Utilizamos o conjunto de dados **Fashion-MNIST**, criado pelo grupo **Zalando Research**. Este dataset consiste em:
+
+- **Imagens:** 70.000 imagens em escala de cinza de diferentes itens de vestuário.  
+- **Dimensão:** Cada imagem possui 28x28 pixels.  
+- **Divisão de Dados:** 60.000 imagens para **treino** e 10.000 imagens para **teste**.  
+- **Categorias (Classes):** O dataset possui 10 classes de roupas. O nome das classificações (ex: “Camiseta”, “Bota”) foi obtido através da documentação do dataset, pois os dados vieram com identificadores numéricos de 0 a 9.
+
+---
+
+### 🧮 Normalização dos Dados de Imagem
+
+Um passo crucial para o treinamento eficaz da rede neural foi a **normalização dos pixels**.
+
+- **O Desafio:** Os valores dos pixels variavam de 0 a 255 (escala de cinza). Essa grande amplitude numérica dificulta o processamento inicial pela rede, resultando em uma perda inicial muito alta (13.10).  
+- **A Solução:** Dividi todos os valores de pixel das imagens de treino e teste por **255.0**.  
+- **Impacto:** A normalização reduziu o intervalo dos dados para **0 e 1 (ponto flutuante)**, fazendo a perda despencar de **13.10 para 0.48**, estabilizando o processo de aprendizado.
+
+---
+
+## 🏗️ Arquitetura da Rede Neural Profunda
+
+O modelo foi construído utilizando o modelo **Sequential** do Keras, que permite empilhar as camadas de forma sequencial.
+
+A arquitetura final é composta por **3 camadas de processamento** (excluindo a camada de entrada):
+
+---
+
+### 1️⃣ Camada de Entrada (Flatten)
+
+- **Função:** Transforma a imagem 2D (28x28) em um vetor 1D (784 posições).  
+  Esse achatamento prepara os dados para as camadas densas subsequentes.
+
+---
+
+### 2️⃣ Camada Oculta Densa (Dense)
+
+- **Unidades:** 256  
+- **Função de Ativação:** ReLU  
+- **Função:** Primeira camada de processamento profundo.  
+  A ReLU introduz **não-linearidade**, permitindo que a rede aprenda padrões complexos (contornos, texturas, etc.).
+
+---
+
+### 3️⃣ Camada de Regularização (Dropout)
+
+- **Taxa:** 0.2 (20%)  
+- **Função:** Desativa aleatoriamente 20% dos neurônios durante o treino.  
+  Evita **overfitting** e melhora a **generalização**.
+
+---
+
+### 4️⃣ Camada de Saída Densa (Dense)
+
+- **Unidades:** 10 (número de classes)  
+- **Função de Ativação:** Softmax  
+- **Função:** Transforma os *logits* em **probabilidades** cuja soma é 1.  
+  A posição com maior probabilidade indica a categoria prevista (ex: `[0.01, 0.05, 0.88, 0.02...]` → classe 3).
+
+---
+
+## 🧪 Compilação e Treinamento do Modelo
+
+| Parâmetro | Valor | Justificativa |
+|------------|--------|---------------|
+| **Otimizador (Optimizer)** | `adam` | Alta eficiência na convergência e ajuste dos pesos. |
+| **Função de Perda (Loss)** | `sparse_categorical_crossentropy` | Ideal para classificação multiclasse com rótulos inteiros. |
+| **Métrica (Metrics)** | `accuracy` | Mede a porcentagem de acertos durante o treino. |
+| **Validação (validation_split)** | 0.2 (20%) | Usa 20% dos dados para validação e diagnóstico de overfitting. |
+| **Épocas (epochs)** | 5 | Quantidade ideal para convergência sem sobreajuste. |
+
+---
+
+## 📊 Análise Gráfica e Método Estatístico
+
+O desempenho foi monitorado comparando as métricas de **treino** e **validação** ao longo das épocas.
+
+### Gráficos Plotados
+
+- **Acurácia por Época:** compara `acc` vs `val_acc`.  
+- **Perda por Época:** compara `loss` vs `val_loss`.
+
+### Diagnóstico Estatístico
+
+| Fenômeno | Característica | Solução Aplicada |
+|-----------|----------------|------------------|
+| **Underfitting** | Baixa acurácia e alta perda tanto em treino quanto em validação. | Aumentar o número de épocas e ajustar camadas. |
+| **Overfitting** | Acurácia de treino alta e validação baixa. | Adição do Dropout (0.2) para regularização. |
+
+> O objetivo é que as curvas de treino e validação **converjam**, aumentando a acurácia e diminuindo a perda.
+
+---
+
+## ✨ Insights do Projeto
+
+- **Poder da Normalização:** Normalizar pixels de 0–255 para 0–1 reduziu a perda inicial em mais de 96%.  
+- **Trade-off de Complexidade:** Mais camadas não significam melhor desempenho. A arquitetura com 256 neurônios + Dropout foi a mais eficiente.  
+- **Força do Dropout:** Resolvido o overfitting — a acurácia de validação superou a de treino, tornando o modelo mais robusto.
+
+---
+
+## 📖 Storytelling: A Jornada da Classificação
+
+Imagine o caos no e-commerce de roupas: a cada nova coleção, milhares de imagens são carregadas.  
+Alguém precisa olhar manualmente e digitar: “Isto é uma bota”, “Isto é uma camiseta”...
+
+Nosso projeto nasce da necessidade de **automatizar essa tarefa**.  
+Com o **Deep Learning**, as redes neurais aprendem **sozinhas** a diferenciar contornos, texturas e detalhes entre uma bota e uma sandália.
+
+O processo foi uma jornada de refinamento:
+1. **Normalizamos** os pixels para acelerar o aprendizado.  
+2. **Escolhemos a melhor arquitetura** com ReLU e Dropout.  
+3. **Combatemos o overfitting** com regularização.
+
+O resultado?  
+Um modelo salvo em `.h5`, pronto para rodar no servidor do e-commerce.  
+Agora, a classificação ocorre em **milissegundos**, automatizando o trabalho e permitindo que o e-commerce foque no que faz de melhor: **vender moda.**
+
+---
+
+## 💾 Salvando e Carregando o Modelo
+
+O modelo treinado foi salvo no formato `.h5` usando:
+
+```python
+model.save("modelo_classificacao_roupas.h5")
