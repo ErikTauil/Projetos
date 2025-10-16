@@ -1,1 +1,134 @@
+# ✈️ Bike & Fly - Previsão de Séries Temporais com Redes Neurais
 
+## 📘 Descrição do Projeto
+
+Este repositório contém uma série de projetos de *Data Science* focados na previsão de séries temporais.  
+O objetivo central é fornecer a empresas a capacidade de realizar um planejamento futuro sólido, utilizando modelos avançados de Redes Neurais com **Keras**.
+
+Trabalhamos com duas bases de dados distintas: o número de passageiros aéreos e a contagem de aluguel de bicicletas, explorando desde a **Regressão Linear** até arquiteturas **Recorrentes (LSTM e GRU)** para capturar a tendência e a sazonalidade dos dados.  
+Todo o desenvolvimento e a execução dos scripts foram realizados no ambiente **VS Code Python**.
+
+---
+
+## 🚀 Projeto 1: Previsão de Passageiros Aéreos com Regressão e Perceptron de Múltiplas Camadas (MLP)
+
+### **Base de Dados:** `passageiros.csv` (Número de Passageiros Aéreos)
+
+Este projeto trata da previsão do número de passageiros aéreos no futuro, explorando a adequação dos dados para modelos de Regressão e Redes Neurais Densas (MLP).
+
+### **Tecnologias e Bibliotecas Utilizadas**
+
+| Categoria | Biblioteca/Função | Uso Específico |
+|------------|------------------|----------------|
+| Manipulação de Dados | pandas (`pd.read_csv`, `pd.DataFrame`) | Leitura, estruturação e manipulação do dataset. |
+| Pré-Processamento | sklearn.preprocessing.StandardScaler | Escalonamento dos dados para facilitar o ajuste da Rede Neural. |
+| Visualização | seaborn (`sns.lineplot`), matplotlib.pyplot (`plt`) | Geração de gráficos de linha para visualizar a série temporal, dados escalados e previsões. |
+| Modelagem de RN | tensorflow.keras.models.Sequential | Definição da estrutura sequencial das camadas da Rede Neural. |
+| Camadas da RN | tensorflow.keras.layers.Dense | Camadas densamente conectadas para Regressão Linear e MLP. |
+| Configuração | `regressor.compile(loss='mean_squared_error', optimizer='adam')` | Configuração do otimizador e da função de custo (MSE). |
+| Treinamento | `regressor.fit`, `regressor.predict` | Treinamento e geração de previsões. |
+| Funções Auxiliares | numpy (`np.array`) | Suporte matemático e manipulação vetorial. |
+
+---
+
+### **Método Estatístico e Gráfico**
+
+- **Método Estatístico:** Regressão (Inicialmente Linear e posteriormente Não-Linear com MLP)  
+- **Função de Custo:** Mean Squared Error (MSE)  
+  \[
+  MSE = \frac{1}{n}\sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2
+  \]
+- **Motivo da Escolha (MSE):** Por se tratar de um problema de regressão, o MSE é ideal, pois penaliza erros maiores de forma quadrática, buscando a menor diferença média entre o valor real e a previsão.  
+- **Gráfico:** Gráfico de Linha (`sns.lineplot`)  
+- **Motivo da Escolha:** É o formato padrão para visualização de séries temporais, permitindo a clara identificação de tendência (crescimento quase linear) e sazonalidade (flutuações periódicas anuais).
+
+---
+
+### **Evolução do Modelo e Insights**
+
+- **Regressão Linear Simples (Dense Layer):** Uma única camada Dense com ativação linear foi utilizada para modelar a tendência dos dados. O ajuste resultou em uma linha reta, falhando em capturar a sazonalidade.  
+  *Insight:* Necessidade de modelos mais complexos ou representação de entrada mais rica.
+
+- **Adoção do Perceptron de Múltiplas Camadas (MLP):** Adição de camadas ocultas (Dense) para introduzir não-linearidade.
+
+- **Importância da Função de Ativação Não-Linear:** A introdução da função *Sigmoide* nas camadas ocultas foi crucial. A não-linearidade permite que a rede combine as entradas de formas complexas, modelando curvas e a sazonalidade, superando a limitação de uma resposta puramente linear.
+
+- **Engenharia de Features para Séries Temporais:** A mudança da entrada do modelo de *Tempo* para *Passageiros Atrasados (lagged values)* demonstrou ser muito mais eficaz.  
+  **Função:** `separa_dados(vetor, n_passos)`  
+  **Conceito:** A previsão é feita com base no(s) valor(es) anterior(es) da própria série (ex: passageiro do mês anterior → passageiro do mês atual). Isso insere a “memória” sequencial de forma explícita na entrada do modelo.
+
+---
+
+## 🚲 Projeto 2: Previsão de Aluguel de Bicicletas com Redes Neurais Recorrentes (RNN)
+
+### **Base de Dados:** `bicicletas.csv` (Contagem de Aluguel de Bicicletas por Hora)
+
+Este projeto foca no uso de arquiteturas de **Redes Neurais Recorrentes**, que são intrinsecamente adequadas para dados sequenciais, como as séries temporais.
+
+### **Tecnologias e Bibliotecas Utilizadas**
+
+| Categoria | Biblioteca/Função | Uso Específico |
+|------------|------------------|----------------|
+| Pré-Processamento | `pd.to_datetime` | Conversão da coluna de datas para o formato adequado. |
+| Modelagem RNN | `tensorflow.keras.layers.LSTM`, `tensorflow.keras.layers.GRU` | Camadas recorrentes para modelagem de sequências. |
+| Estrutura de Dados | `numpy.reshape` | Transformação da entrada para o formato 3D *(amostras, passos de tempo, atributos)* exigido pelas RNNs. |
+| Otimizador | `optimizer='RMSProp'` | Otimizador escolhido para lidar com o problema do *exploding gradient* em RNNs. |
+| Treinamento Avançado | `validation_data` | Avaliação do desempenho do modelo em dados de validação. |
+
+---
+
+### **Método Estatístico e Gráfico**
+
+- **Método Estatístico:** Modelagem de Séries Temporais via Redes Neurais Recorrentes (RNN)  
+- **Função de Custo:** Mean Squared Error (MSE)  
+- **Gráfico:** Gráfico de Linha (`sns.lineplot`)  
+- **Avaliação de Modelo:** Comparação do *Custo (Loss)* vs *Época* para Treino e Teste.  
+  A diminuição conjunta de *loss* e *val_loss* indica que o modelo está aprendendo e generalizando bem, evitando o overfitting.
+
+---
+
+### **Arquiteturas Recorrentes e Insights**
+
+- **O Problema da Memória em Séries:** O perceptron falha porque não entende a sequência. As RNNs são projetadas com loops internos para manter uma “memória” da sequência anterior.
+
+- **LSTM (Long Short-Term Memory):**  
+  - **Conceito:** Possui uma célula de estado e portões (*gates*) (Forget, Input, Output) que regulam o fluxo de informações.  
+  - **Insight:** Ideal para séries temporais muito longas, onde padrões passados (como as férias anuais) influenciam previsões futuras.
+
+- **GRU (Gated Recurrent Unit):**  
+  - **Conceito:** Versão simplificada da LSTM, com menos portões.  
+  - **Insight:** Por ter menos parâmetros para otimizar, a GRU é significativamente mais rápida para treinar (embora lembre-se de sequências menores).  
+  No projeto, tanto a LSTM quanto a GRU alcançaram resultados satisfatórios na previsão de bicicletas, o que levou à escolha da GRU por sua maior eficiência computacional.
+
+---
+
+## 📝 Conclusão e Storytelling
+
+### **A Jornada de Previsão de Negócios**
+
+> "Nossa missão era simples, mas ambiciosa: transformar dados históricos em uma bússola para o futuro de nossos clientes.  
+> A primeira jornada nos levou ao setor aéreo. Nossos parceiros precisavam saber quantos passageiros esperariam nos próximos anos.  
+> Começamos com a simplicidade da Regressão Linear, mas o mercado aéreo não é simples — ele tem ritmo, ele tem sazonalidade.  
+> O avanço veio ao tratar o tempo não apenas como uma coordenada, mas como uma memória (o número de passageiros do mês passado prevê o número deste mês).  
+> 
+> A segunda missão nos levou à contagem de aluguel de bicicletas, um problema com granularidade horária, exigindo uma ‘memória’ mais sofisticada. Foi quando trouxemos as Redes Neurais Recorrentes (LSTM e GRU).  
+> Ao invés de apenas ‘olhar para trás’, as RNNs ‘lembram-se’ de toda a sequência com seus portões lógicos.  
+> 
+> O resultado foi impressionante: previsões que se encaixavam perfeitamente no ritmo frenético do aluguel, permitindo que as empresas planejassem manutenção e logística de frota com precisão cirúrgica.  
+> 
+> Em última análise, este projeto não é apenas sobre treinar modelos; é sobre construir confiança.  
+> É a ciência de dados fornecendo às empresas o conhecimento para ir além da reação e entrar no domínio do planejamento estratégico — seja controlando a capacidade de voos ou garantindo que a bicicleta certa esteja no lugar certo, na hora certa."
+
+---
+
+## ⚙️ Configuração e Execução
+
+Para rodar os mini-projetos, certifique-se de ter as bibliotecas listadas instaladas no seu ambiente **VS Code Python**.
+
+### **Pré-requisitos**
+- Python 3.x  
+- Ambiente de desenvolvimento: VS Code (Python)
+
+### **Instalação das Bibliotecas**
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn tensorflow keras
