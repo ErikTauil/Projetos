@@ -1,1 +1,156 @@
+# 🛡️ Projeto de Detecção de Fraudes em Transações Financeiras
 
+## 🚀 Contexto e Storytelling
+
+Este projeto foi desenvolvido para compor o portfólio de uma *startup* de Ciência de Dados com o objetivo de **captar clientes no setor financeiro e bancário**, um mercado que enfrenta desafios recorrentes com fraudes.
+
+### 💼 O Desafio do Banco Fictício
+
+Atuamos como a equipe de Ciência de Dados desta *startup*.  
+Nosso cliente potencial, um grande banco, enfrenta um problema sério: **casos de fraude** em seu sistema de cadastro e transações de clientes.  
+O objetivo do projeto é construir uma **solução robusta de Machine Learning (ML)** para **identificar e mitigar** essas falhas, reduzindo perdas e aumentando a segurança do cliente.
+
+O banco forneceu um conjunto de dados anonimizado (com colunas como `x1`, `x2`, `x3`, etc.), mas nosso desafio foi transformá-lo em uma *pipeline* de detecção de fraudes de ponta a ponta, demonstrando nossa capacidade de entregar resultados concretos e de alto valor.
+
+---
+
+## ⚙️ Arquitetura do Projeto: Pipeline de Machine Learning
+
+O projeto segue uma estrutura completa de *pipeline* de Machine Learning, desde a aquisição e pré-processamento dos dados até a avaliação e otimização dos modelos.
+
+---
+
+### 1️⃣ Aquisição e Análise Exploratória de Dados (AED)
+
+A fase inicial focou em compreender a estrutura do dataset e realizar os tratamentos necessários.
+
+#### 📦 Tecnologias e Bibliotecas Utilizadas
+
+- **pandas** → Importação, manipulação, limpeza e análise estrutural dos dados.  
+  **Funções Principais:** `pd.read_csv()`, `df.columns`, `df.head()`, `df.describe()`, `df.shape`, `df.info()`, `df.groupby()`, `df.isnull().values.any()`, `df.rename()`.
+
+- **pandas-profiling** → Geração de relatório HTML detalhado de AED em uma única linha de código, facilitando a identificação de tipos de variáveis, valores nulos e correlações.
+
+#### 📊 Pré-processamento e Transformação de Dados
+
+1. **Renomeação de Colunas:**  
+   As colunas anonimizadas (`x1`, `x2`, etc.) foram renomeadas para nomes legíveis como `fraude`, `super_fraude`, `tempo`, `tipo`, `valor`, `cliente1`, `saldo_inicial_c1`, `novo_saldo_c1`, `cliente2`, `saldo_inicial_c2`, `novo_saldo_c2`.
+
+2. **Encoding de Variáveis Categóricas:**  
+   A coluna `tipo` foi transformada em variáveis numéricas via **One-Hot Encoding** (`pd.get_dummies()`), evitando hierarquias artificiais criadas por *Label Encoding*.
+
+3. **Remoção de Colunas:**  
+   As colunas `cliente1`, `cliente2` (sem relevância preditiva) e `super_fraude` (sem ocorrências) foram removidas para simplificar o modelo e respeitar privacidade de dados sensíveis.
+
+---
+
+### 2️⃣ Balanceamento de Dados
+
+A análise inicial revelou um **severo desbalanceamento de classes**:  
+> de 101.613 transações, apenas 116 eram classificadas como fraude.
+
+- **Técnica Utilizada:** *Oversampling* com **SMOTE (Synthetic Minority Over-sampling Technique)**  
+- **Biblioteca:** `imblearn`  
+- **Justificativa:** O SMOTE cria amostras sintéticas da classe minoritária, reduzindo o viés do modelo e permitindo melhor detecção de fraudes.
+
+---
+
+### 3️⃣ Modelagem e Avaliação (Treinamento e Teste)
+
+Os modelos foram treinados com a base de dados balanceada para garantir uma avaliação justa.
+
+#### 📚 Tecnologias e Funções
+
+- **scikit-learn (sklearn)**  
+  **Funções Principais:** `train_test_split`, `LogisticRegression`, `DecisionTreeClassifier`, `RandomForestClassifier`, `metrics (accuracy_score, precision_score, recall_score, f1_score, confusion_matrix)`.
+
+- **Divisão de Dados:**  
+  75% para treinamento e 25% para teste, com *seed* definida para **replicabilidade**.
+
+#### 📊 Modelos de Machine Learning Implementados e Comparados
+
+| Modelo | Metodologia | Objetivo Inicial |
+|:-------|:-------------|:----------------|
+| **Regressão Logística (RL)** | Modelo estatístico que prevê a probabilidade de resposta binária | Fornecer baseline de desempenho |
+| **Árvore de Decisão (DT)** | Modelo não linear que divide os dados em nós de decisão | Comparar com o modelo linear e mitigar overfitting |
+| **Random Forest (RF)** | Conjunto de múltiplas árvores de decisão (votação) | Aumentar robustez e precisão preditiva |
+
+---
+
+#### 📈 Gráficos de Avaliação e Justificativas
+
+- **Matriz de Confusão**  
+  Mostra Verdadeiros Positivos (TP), Falsos Positivos (FP), Verdadeiros Negativos (TN) e Falsos Negativos (FN).  
+  > Em fraudes, o foco está em reduzir **FN** — fraudes não detectadas representam risco financeiro.
+
+- **Curva ROC & AUC**  
+  Mede a taxa de verdadeiros positivos (TPR) vs falsos positivos (FPR).  
+  > Quanto mais próxima do canto superior esquerdo (AUC ≈ 1.0), melhor o modelo.
+
+---
+
+### 4️⃣ Otimização do Modelo e Resultados Finais
+
+O **Random Forest** apresentou o melhor desempenho e foi otimizado.
+
+#### 🔧 Otimização de Hiperparâmetros
+
+- **Método:** `RandomizedSearchCV`
+- **Hiperparâmetros Ajustados:** `max_depth`, `n_estimators`, `criterion`
+- **Métrica de Otimização:** *Recall* (Sensibilidade)
+
+> O *Recall* mede a capacidade do modelo de detectar todas as fraudes reais  
+> \[
+Recall = \frac{TP}{TP + FN}
+\]  
+Em um contexto bancário, minimizar **FN** é essencial.
+
+---
+
+#### 🏆 Comparação de Resultados Finais (Random Forest)
+
+| Métrica | RL (SMOTE) | RF (Base) | RF (Otimizado) |
+|:--------|:-----------:|:----------:|:--------------:|
+| **Acurácia** | 0.941 | 0.972 | **0.991** |
+| **Precisão** | 0.924 | 0.970 | **0.990** |
+| **Recall** | 0.962 | 0.974 | **0.992** |
+| **F1-Score** | 0.942 | 0.972 | **0.991** |
+
+> O modelo **Random Forest Otimizado** apresentou o melhor desempenho geral, atingindo **~99% de acurácia**.
+
+---
+
+## 💡 Insights e Recomendações Estratégicas
+
+A partir da análise de correlação e desempenho do modelo, identificamos **padrões críticos de fraude**:
+
+### 🔍 Insight 1: `tipo_TRANSFER` é um Forte Indicador de Fraude
+
+| Hipótese | Recomendação de Segurança |
+|:----------|:---------------------------|
+| O cliente normalmente usa *Payment* ou *Cash-out*, e a fraude ocorre via *Transfer*. | Implementar **verificação adicional** (token ou pergunta de segurança) para transações de transferência. |
+
+---
+
+### ⏰ Insight 2: O Fator `tempo` Indica Transações Atípicas
+
+| Hipótese | Recomendação |
+|:----------|:--------------|
+| 1️⃣ Movimentações fora do horário comercial (ex: madrugada) são indícios de fraude. | Ativar **CAPTCHA** ou **verificação biométrica** nesses horários. |
+| 2️⃣ Fraudes ocorrem em períodos atípicos do mês. | Implementar **alerta de movimentação atípica** e autenticação em dois passos para valores elevados. |
+
+---
+
+## 💻 Como Executar o Projeto
+
+Este projeto foi desenvolvido em **Python** no ambiente **VS Code**.
+
+### 🧩 Pré-requisitos
+
+Certifique-se de ter o **Python 3.x** instalado e execute:
+
+```bash
+pip install pandas scikit-learn numpy imbalanced-learn matplotlib pandas-profiling
+
+
+👨‍💻 **Autor:** Erik Lopes Tauil 📅 **Ano:** 2025 🔗 **Categoria:** Data Science | Machine Learning | Segurança Financeira
