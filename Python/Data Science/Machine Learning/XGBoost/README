@@ -1,1 +1,140 @@
+HealthIA – Classificador de Doenças a partir de Sintomas
 
+🩺 Visão Geral
+
+O HealthIA é um projeto de inteligência artificial que analisa sintomas médicos em texto e prevê diagnósticos de 29 doenças diferentes, como Diabetes Tipo 1, Parkinson, Alzheimer, Lúpus, Fibromialgia, entre outras.
+
+Este projeto é ideal para:
+
+Profissionais de saúde que desejam testar modelos de predição de doenças.
+
+Entusiastas de machine learning e NLP em português.
+
+Recrutadores que querem entender aplicações práticas de IA em saúde.
+
+⚙️ Funcionalidades
+
+Dataset Completo
+
+Contém exemplos de sintomas para 29 doenças.
+
+Cada linha representa um conjunto de sintomas associados a um diagnóstico.
+
+Possui tratamento de duplicatas e normalização de texto.
+
+Pré-processamento e Vetorização
+
+Textos dos sintomas são processados (remoção de caracteres especiais, stopwords, stemming).
+
+Vetorização usando TF-IDF para transformar palavras em números compreensíveis pelo modelo.
+
+Codificação de Diagnósticos
+
+Os diagnósticos (Y) são codificados em valores numéricos com LabelEncoder para compatibilidade com algoritmos de machine learning.
+
+Treinamento do Modelo
+
+Utiliza RandomForestClassifier para treinar o modelo.
+
+Faz balanceamento de classes com RandomOverSampler para evitar viés de dados.
+
+Divide os dados em treino e teste (80/20).
+
+Avaliação
+
+Mede a acurácia do modelo em dados de teste.
+
+Atualmente, o modelo alcança aproximadamente 98% de acurácia, mostrando alta eficiência em classificar corretamente os sintomas.
+
+🧩 Estrutura do Código
+HealthIA/
+│
+├── services/
+│   ├── datasetService.py        # Dataset e funções de manipulação de dados
+│   ├── vetorizacaoService.py    # Vetorização TF-IDF e codificação de labels
+│   └── treinamentoService.py    # Treinamento, balanceamento e avaliação do modelo
+│
+├── main.py                      # Script principal para execução
+└── README.md                    # Este arquivo
+
+🛠️ Hiperparâmetros e Salvamento de Modelos
+
+Hiperparâmetros: Configurações do modelo RandomForest e TF-IDF (ex: n_estimators, max_depth, stop_words) – [14:15]
+
+Salvar o modelo RandomForest: Persistir modelo treinado para futuras predições – [08:21]
+
+Salvar o vetorizador TF-IDF: Armazenar objeto TfidfVectorizer treinado – [21:29]
+
+Salvar modelo XGBoost (se implementado futuramente) – [06:12]
+
+🚀 FastAPI – API para Diagnóstico
+
+FastAPI básico: Criar servidor web para receber sintomas via JSON – [13:28]
+
+FastAPI Router: Estrutura modular para endpoints – [09:59]
+
+Executar diagnóstico: Chamadas de predição via API – [09:38]
+
+Executar Service: Serviços internos do backend para pré-processamento e classificação – [12:33]
+
+Com isso, o HealthIA permite tanto execução local quanto via API para integração com aplicações externas.
+
+📚 Tecnologias Utilizadas
+
+Python 3.11
+
+Pandas (manipulação de dados)
+
+NLTK (pré-processamento de texto em português)
+
+Scikit-learn (TF-IDF, RandomForest, LabelEncoder)
+
+Imbalanced-learn (balanceamento de classes)
+
+FastAPI (API para predição de sintomas)
+
+🚀 Como Rodar
+
+Clone este repositório:
+
+git clone https://github.com/seu-usuario/HealthIA.git
+cd HealthIA
+
+
+Crie e ative um ambiente virtual:
+
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux / Mac
+source venv/bin/activate
+
+
+Instale as dependências:
+
+pip install -r requirements.txt
+
+
+Execute o script principal:
+
+python main.py
+
+
+(Opcional) Rodar FastAPI:
+
+uvicorn main:app --reload
+
+🧠 Exemplo de Saída
+📊 Primeiras linhas do dataset:
+                                       sintomas           diagnostico
+0  cansaço extremo dor articular severa crises...  anemia_falciforme
+1  dor articular crônica juntas inchadas rigidez...  artrite_reumatoide
+...
+🔢 Total de registros: 430
+🧬 Número de doenças únicas: 29
+📈 Contagem de sintomas por doença:
+anemia_falciforme          12
+artrite_reumatoide          15
+diabetes_tipo1              13
+...
+=== Acurácia do modelo: 98.08% ===
