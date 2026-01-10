@@ -10,7 +10,7 @@
 ---
 
 ### 🚀 Sobre Mim
-Profissional especializado em **Ciência de Dados e Inteligência de Negócios**. Minha expertise envolve a construção de pipelines de dados, modelos preditivos e dashboards estratégicos que transformam dados brutos em decisões de alto impacto. Com forte domínio em **Python, SQL e Power BI**, busco constantemente otimizar processos através de automação e IA.
+Profissional especializado em **Ciência de Dados e Inteligência de Negócios**. Minha expertise envolve a construção de pipelines de dados, modelos preditivos e dashboards estratégicos que transformam dados brutos em decisões de alto impacto. Com forte domínio em **Python, Oracle, SQL e Power BI**, busco constantemente otimizar processos através de automação e IA.
 
 📫 **Como me encontrar:**
 * **LinkedIn:** [linkedin.com/in/eriktauil](https://www.linkedin.com/in/eriktauil)
