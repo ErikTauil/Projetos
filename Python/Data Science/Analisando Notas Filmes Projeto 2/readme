@@ -12,8 +12,6 @@ Este repositório contém scripts em Python para análise de dados dos filmes. P
 
 Instalar o Python 3.x
 
-Se você não tem o Python instalado, baixe aqui.
-
 Instalar as dependências necessárias
 
 Use o pip para instalar as bibliotecas requeridas:
