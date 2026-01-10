@@ -14,7 +14,7 @@ Profissional especializado em **Ciência de Dados e Inteligência de Negócios**
 
 📫 **Como me encontrar:**
 * **LinkedIn:** [linkedin.com/in/eriktauil](https://www.linkedin.com/in/eriktauil)
-* **E-mail:** [eriktauil@gmail.com
+* **E-mail:** [eriktauil@gmail.com]
 
 ---
 
