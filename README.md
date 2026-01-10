@@ -23,7 +23,7 @@ Profissional especializado em **Ciência de Dados e Inteligência de Negócios**
 Clique nos links abaixo para explorar as soluções por área:
 
 * **[🐍 Ciência de Dados & Machine Learning](./Python%2FData%20Science)** *Previsões, Regressões, Séries Temporais e Visão Computacional.*
-* **[📈 Análise de Dados & BI](#)** *(Adicione o link aqui quando criar a pasta)* *Dashboards interativos e Storytelling com dados.*
+* **[📈 Análise de Dados & BI](#)(./Python%2FData%20Science)** ** *Dashboards interativos e Storytelling com dados.*
 * **[🧠 IA & NLP](#)** *Processamento de Linguagem Natural e modelos generativos.*
 * **[🗄️ SQL & Bancos de Dados](#)** *Consultas complexas, modelagem e otimização de queries.*
 
