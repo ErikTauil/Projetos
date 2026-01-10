@@ -35,10 +35,13 @@ Clique nos links abaixo para explorar as soluções por área:
 | Área | Tecnologias |
 | :--- | :--- |
 | **Linguagens** | Python (Pandas, NumPy, Scikit-Learn), SQL |
-| **Visualização** | Power BI, Matplotlib, Seaborn |
-| **Machine Learning** | Regressão, Classificação, Clustering, Séries Temporais |
-| **IA / Visão** | OpenCV, NLP, Transformers |
-| **Bancos de Dados** | Oracle, PostgreSQL, MySQL |
+| **Deep Learning** | **Keras, TensorFlow** (Redes Neurais, Modelos de Previsão) |
+| **Machine Learning** | Regressão, Classificação, Clustering, Séries Temporais e **XGBoost** |
+| **Análise Setorial** | **Detecção de Fraudes Financeiras**, Análise de Imigrantes e Filmes |
+| **IA / Visão** | OpenCV, **NLP (Processamento de Linguagem Natural)**, Transformers |
+| **Visualização** | Power BI, Matplotlib, Seaborn, Plotly |
+| **Bancos de Dados** | **Oracle**, PostgreSQL, MySQL |
+
 
 ---
 *“Transformando dados em decisões inteligentes.”*
