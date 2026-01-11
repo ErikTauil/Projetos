@@ -26,7 +26,7 @@ Clique nos links abaixo para explorar as soluções por área:
 * **[🐍 Ciência de Dados & Machine Learning](./Python%2FData%20Science)** *Previsões, Regressões, Séries Temporais e Visão Computacional.*
 * **[📈 Análise de Dados & BI](./Python%2FData%20Science)** *Dashboards interativos e Storytelling com dados.*
 * **[🧠 IA & NLP](./Python%2FData%20Science)** *Processamento de Linguagem Natural e modelos generativos.*
-* **[🗄️ SQL & Bancos de Dados](#)** *Consultas complexas, modelagem e otimização de queries.*
+* **[🗄️ SQL & Bancos de Dados](./SQL)** *Consultas complexas, modelagem e otimização de queries.*
 
 ---
 
