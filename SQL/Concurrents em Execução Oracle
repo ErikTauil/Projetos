@@ -1,0 +1,45 @@
+# Oracle EBS - Monitoramento de Concurrent Requests
+
+Este repositório contém uma query SQL desenvolvida para extrair informações detalhadas sobre solicitações concorrentes (Concurrent Requests) que não foram concluídas no ambiente Oracle E-Business Suite.
+
+## 📋 Descrição
+
+A query fornece uma visão clara da fila de processamento, traduzindo flags técnicas do sistema em status operacionais (ex: Scheduled, On Hold, Inactive). É essencial para DBAs e Consultores Funcionais monitorarem a saúde do Concurrent Manager.
+
+SELECT 
+    fcr.request_id,
+    DECODE(fcr.phase_code, 'P', 
+        DECODE(fcr.hold_flag, 'Y', 'Inactive', fl_pend.meaning), 
+        fl_pend.meaning
+    ) AS phase,
+    DECODE(fcr.phase_code, 'P', 
+        DECODE(fcr.hold_flag, 'Y', 'On Hold', 
+            DECODE(SIGN(fcr.requested_start_date - SYSDATE), 1, 'Scheduled', fl_stat.meaning)
+        ), 
+        fl_stat.meaning
+    ) AS status,
+    fcpt.user_concurrent_program_name,
+    fcr.increment_dates,
+    fcr.resubmit_interval,
+    fcr.resubmit_interval_unit_code,
+    fcr.resubmit_interval_type_code,
+    fcr.parent_request_id,
+    fcr.requested_start_date,
+    fu.user_name AS requested_by
+FROM 
+    fnd_concurrent_requests    fcr,
+    fnd_concurrent_programs_tl fcpt,
+    fnd_lookups                fl_pend,
+    fnd_lookups                fl_stat,
+    fnd_user                   fu
+WHERE 1 = 1
+    AND fcpt.concurrent_program_id = fcr.concurrent_program_id
+    AND fcpt.language              = USERENV('LANG')
+    AND fcr.phase_code             = fl_pend.lookup_code
+    AND fl_pend.lookup_type        = 'CP_PHASE_CODE'
+    AND fcr.status_code            = fl_stat.lookup_code
+    AND fl_stat.lookup_type        = 'CP_STATUS_CODE'   
+    AND fu.user_id                 = fcr.requested_by
+    AND fl_pend.meaning           != 'Completed'
+ORDER BY 
+    fcr.request_id DESC;
