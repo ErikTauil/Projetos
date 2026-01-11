@@ -1,0 +1,42 @@
+# Oracle Applications - Queries Úteis
+
+Repositório destinado ao armazenamento de scripts SQL para administração e suporte do Oracle E-Business Suite (EBS).
+
+## 🚀 Consulta de Responsabilidades por Usuário
+
+Esta query é essencial para processos de auditoria e troubleshooting de acessos. Ela lista todas as responsabilidades vinculadas a um determinado `USERNAME`, trazendo o contexto contábil (Set of Books).
+
+/*
+  LISTA RESPONSABILIDADES POR USUÁRIO (ORACLE EBS)
+  -----------------------------------------------
+  Retorna as responsabilidades atribuídas a um usuário específico,
+  incluindo o Set of Books (SOB) associado via perfil.
+*/
+
+SELECT UNIQUE 
+    u.user_id, 
+    SUBSTR(u.user_name, 1, 30)           AS user_name,
+    SUBSTR(r.responsibility_name, 1, 60) AS responsiblity,
+    SUBSTR(a.application_name, 1, 50)    AS application,
+    r.responsibility_id,
+    fpov.profile_option_value            AS sob
+FROM 
+    APPS.fnd_user u,
+    APPS.fnd_user_resp_groups g,
+    APPS.fnd_application_tl a,
+    APPS.fnd_responsibility_tl r,
+    APPS.fnd_profile_options fpo, 
+    APPS.fnd_profile_option_values fpov
+WHERE 
+    g.user_id(+) = u.user_id
+    AND g.responsibility_application_id = a.application_id
+    AND a.application_id = r.application_id
+    AND g.responsibility_id = r.responsibility_id
+    AND u.user_id = (SELECT user_id FROM APPS.fnd_user WHERE user_name = '&USERNAME')
+    AND fpov.profile_option_id = fpo.profile_option_id
+    AND fpov.level_value = r.responsibility_id
+    AND fpo.profile_option_name = 'GL_SET_OF_BKS_NAME'
+ORDER BY 
+    user_name,
+    application,
+    responsiblity;
