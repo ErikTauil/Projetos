@@ -1,0 +1,64 @@
+# Relatório de Ordens de Compra vs Requisições (Oracle EBS)
+
+Este repositório contém uma consulta SQL otimizada para o módulo de **Purchasing (PO)** do Oracle E-Business Suite (R12).
+
+## 📋 Descrição
+A query realiza o rastreamento completo desde a origem da demanda (Requisição) até o documento de compra final (Purchase Order), permitindo a conferência de saldos, compradores responsáveis e centros de custo envolvidos.
+
+## 🔍 Principais Informações Extraídas
+* **Documentos:** Número da PO e número da Requisição.
+* **Status de Quantidade:** Comparativo entre o solicitado, entregue e cancelado.
+* **Logística:** Local de entrega (Location Code).
+* **Pessoas:** Nome do comprador e nome do requisitante original.
+* **Contábil:** Centro de Custo extraído via KFF (Key Flexfield) da GL.
+
+
+SELECT 
+    HRL.location_code AS local_entrega,
+    PHA.segment1 AS po,
+    PAV.agent_name AS comprador,
+    PV.vendor_name AS fornecedor,
+    PDA.quantity_ordered AS qtd_solicitada,
+    PDA.quantity_delivered AS qtd_entregue,
+    PDA.quantity_cancelled AS qtd_cancelada,
+    GLCC.segment4 AS centro_de_custo,
+    PDA.destination_type_code,
+    PRH.segment1 AS requisicao,
+    PAPF.full_name AS requisitante
+FROM 
+    apps.hr_locations hrl,
+    apps.po_line_locations_all pll,
+    apps.po_distributions_all pda,
+    apps.po_headers_all pha,
+    apps.po_vendors pv,
+    apps.gl_code_combinations glcc,
+    apps.po_agents_v pav,
+    apps.po_requisition_headers_all prh,
+    apps.po_requisition_lines_all prl,
+    apps.po_req_distributions_all prd,
+    apps.per_people_f papf,
+    apps.fnd_user fu
+WHERE 
+    HRL.ship_to_location_id = PLL.ship_to_location_id
+    AND PLL.line_location_id = PDA.line_location_id
+    AND PDA.po_header_id = PHA.po_header_id
+    AND PHA.vendor_id = PV.vendor_id
+    AND PDA.code_combination_id = GLCC.code_combination_id
+    AND PAV.agent_id = PHA.agent_id
+    AND PRH.requisition_header_id = PRL.requisition_header_id
+    AND PRH.org_id = PRL.org_id
+    AND PRL.requisition_line_id = PRD.requisition_line_id
+    AND PRL.org_id = PRD.org_id
+    AND PRD.distribution_id = PDA.po_distribution_id (+)
+    AND PRD.org_id = PDA.org_id (+)
+    AND PRH.created_by = FU.user_id
+    AND FU.employee_id = PAPF.person_id
+    -- Filtros de Regra de Negócio
+    AND HRL.location_code IN ('LOCAL_IO_SD', 'LOCAL_IO_SA', 'LOCAL_IO_SE', 'LOCAL_IO_WA', 'LOCAL_IO_WD', 'LOCAL_IO_WB')
+    AND NVL(PHA.closed_code, 'OPEN') = 'OPEN'
+    AND PHA.approved_flag = 'Y'
+    AND NVL(PHA.cancel_flag, 'N') = 'N'
+    AND NVL(PLL.cancel_flag, 'N') = 'N'
+    AND PHA.type_lookup_code = 'STANDARD';
+
+
