@@ -1,0 +1,36 @@
+# Consulta de Cadastro de Itens e Contas Contábeis (Oracle EBS)
+
+## 📝 Descrição
+Este script SQL foi desenvolvido para o ambiente Oracle Applications (EBS). Ele realiza a extração de dados mestres de itens de inventário, vinculando as definições de organização e as combinações contábeis (GL Accounts) associadas a cada produto.
+
+## 🚀 Funcionalidades
+- Retorna o código e descrição do item.
+- Exibe informações fiscais (NCM e Classe de Condição).
+- Concatena os segmentos contábeis para fácil leitura (KFV - Key Flexfield Views).
+- Filtra automaticamente itens com status 'Active'.
+
+SELECT
+    ood.organization_code AS codigo_org,
+    msi.segment1 AS codigo_item,
+    msi.description AS descricao,
+    msi.primary_uom_code,
+    msi.inventory_item_status_code,
+    msi.global_attribute1 AS ncm,
+    msi.global_attribute2 AS classe_cond_tran,
+    gcc.concatenated_segments AS conta_despesa,
+    gcmv.concatenated_segments AS conta_mercadoria_vendida,
+    gcv.concatenated_segments AS conta_venda,
+    ood.organization_name AS organizacao
+FROM
+    apps.mtl_system_items_b msi,
+    apps.gl_code_combinations_kfv gcc,
+    apps.org_organization_definitions ood,
+    apps.gl_code_combinations_kfv gcmv,
+    apps.gl_code_combinations_kfv gcv
+WHERE
+    msi.expense_account = gcc.code_combination_id
+    AND msi.organization_id = ood.organization_id
+    AND msi.cost_of_sales_account = gcmv.code_combination_id
+    AND msi.sales_account = gcv.code_combination_id
+    AND msi.inventory_item_status_code = 'Active'
+    AND ood.organization_code IN ('PD', 'PG', 'PH', 'MX');
