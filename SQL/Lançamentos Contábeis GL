@@ -1,0 +1,47 @@
+# Oracle GL - Extração de Lançamentos Contábeis
+
+Este repositório contém uma query SQL desenvolvida para extração de dados do módulo **General Ledger (GL)** no Oracle E-Business Suite (EBS).
+
+## 📋 Objetivo
+A query tem como finalidade listar os detalhes de lançamentos contábeis (Diários), permitindo a visualização de débitos, créditos, contas contábeis e a origem dos lotes para fins de auditoria e conciliação financeira.
+
+
+SELECT 
+    gl.name                                        AS ledger_name, 
+    gcc.concatenated_segments                      AS combinacao_contabil, 
+    DECODE(gl.ledger_id, '2199', gcc.segment8, gcc.segment4) AS conta, 
+    b.description,
+    b.effective_date                               AS "DATE",
+    b.accounted_cr,
+    b.accounted_dr,
+    c.name                                         AS batch_name,
+    a.name                                         AS journal_name,
+    a.je_source                                    AS "SOURCE",
+    a.je_category,
+    b.je_line_num                                  AS line_num,
+    a.je_header_id
+FROM 
+    gl_je_headers                 a,
+    gl_je_lines                   b,
+    gl_je_batches                 c,
+    apps.gl_code_combinations_kfv gcc,
+    gl_ledgers                    gl
+WHERE 
+    b.je_header_id = a.je_header_id
+    AND a.je_batch_id = c.je_batch_id
+    AND gcc.code_combination_id = b.code_combination_id
+    AND b.ledger_id = gl.ledger_id
+    -- Filtros de Período
+    AND b.effective_date BETWEEN TO_DATE('01/08/2023', 'DD/MM/YYYY') AND TO_DATE('30/08/2023', 'DD/MM/YYYY')
+    -- Filtros de Lote e Descrição
+    AND c.name LIKE 'Other A 31082309085959 38403419%'
+    AND b.description LIKE '%3045%'
+    /* -- Filtros Opcionais Desativados:
+    -- AND rctlgda.customer_trx_id IN (1262067, 1218065)
+    -- AND a.je_source = 'Manual'
+    -- AND b.status = 'P'
+    -- AND gcc.segment4 IN (216101001)
+    -- AND SUBSTR(a.period_name, 5, 2) = '07' 
+    -- AND b.effective_date <= '31-12-2007'
+    */
+;
