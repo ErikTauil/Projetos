@@ -1,1 +1,54 @@
-.
+
+# Oracle EBS - AP Payment Analysis Report
+
+Este repositório contém uma query SQL desenvolvida para o módulo **Oracle Payables (AP)** do Oracle E-Business Suite (R12).
+
+## 📋 Objetivo
+A query extrai informações detalhadas sobre pagamentos efetuados a fornecedores, relacionando-os diretamente com as faturas (Invoices) correspondentes. É ideal para processos de auditoria, conciliação bancária e análise de fluxo de caixa histórico.
+
+
+
+SELECT
+    d.name                              "OU",
+    a.bank_account_name                 "Account Number",
+    v.segment1                          "Supplier Number",
+    a.vendor_name                       "Supplier name",
+    vs.attribute2                       "GSL",
+    a.city                              "City",
+    TO_CHAR(a.check_date, 'DD/MM/RRRR') "Payment Date",
+    TO_CHAR(b.accounting_date, 'DD/MM/RRRR') "GL Date",
+    a.check_number                      "Payment Number",
+    a.amount                            "Payment Amount",
+    a.currency_code                     "Currency",
+    a.payment_method_lookup_code        "Payment Method",
+    NVL(a.exchange_rate, 1)             "Rate",
+    (a.amount * NVL(a.exchange_rate, 1)) "Payment Amount - converted",
+    c.invoice_num                       "Invoice Number",
+    b.payment_num                       "Installment",
+    TO_CHAR(c.invoice_date, 'DD/MM/RRRR') "Invoice Date",
+    b.amount                            "Payment amount of Invoice",
+    (b.amount * NVL(a.exchange_rate, 1)) "Invoice amount - converted"
+FROM
+    apps.ap_checks_all           a,
+    apps.ap_invoice_payments_all b,
+    apps.ap_invoices_all         c,
+    apps.hr_operating_units      d,
+    apps.po_vendor_sites_all     vs,
+    apps.po_vendors              v
+WHERE
+        a.check_id = b.check_id
+    AND a.org_id = b.org_id
+    AND b.invoice_id = c.invoice_id
+    AND b.org_id = c.org_id
+    AND a.org_id = d.organization_id
+    AND c.vendor_site_id = vs.vendor_site_id
+    AND vs.vendor_id = v.vendor_id
+    -- Filtros de Negócio
+    AND a.check_date >= '01-JAN-2013'
+    AND a.check_date < '31-DEC-2013'
+    AND a.void_date IS NULL
+    AND a.amount <> 0
+ORDER BY
+    d.name,
+    a.vendor_name,
+    c.invoice_num;
