@@ -1,0 +1,72 @@
+# Oracle EBS - Profile Option Value Finder
+
+Este repositório contém um script SQL para localizar e identificar os valores de **Profile Options** (Opções de Perfil) em todos os níveis de hierarquia do Oracle E-Business Suite.
+
+## 🚀 Objetivo
+
+No Oracle EBS, as configurações podem estar espalhadas por diversos níveis. Esta query consolida as tabelas de metadados de perfis (`FND_PROFILE`) com as tabelas de contexto (`USERS`, `RESPONSIBILITIES`, `ORGS`), permitindo que você veja o valor final e o contexto de aplicação de cada parâmetro.
+
+## 📊 Níveis Suportados
+
+A query identifica automaticamente o nível através da coluna `level_id`:
+* **10001 (SITE):** Configuração global.
+* **10002 (APP):** Nível de Aplicação.
+* **10003 (RESP):** Nível de Responsabilidade.
+* **10004 (USER):** Nível de Usuário específico.
+* **10005 (SERVER):** Nível de Servidor/Nó.
+* **10006 (ORG):** Nível de Unidade Operacional.
+
+## 🛠 Como usar
+
+1. Execute o script em sua ferramenta de preferência (SQL Developer, Toad, SQL*Plus).
+2. O script solicitará uma variável de substituição `&&profile`. 
+   - Digite parte do nome técnico do profile (ex: `ORG_ID` ou `PRINTER`).
+3. (Opcional) Descomente a cláusula no final do `WHERE` para filtrar por um usuário específico.
+
+
+SELECT 
+    po.profile_option_name AS "NAME",
+    po.user_profile_option_name,
+    DECODE(TO_CHAR(pov.level_id),
+        '10001', 'SITE',
+        '10002', 'APP',
+        '10003', 'RESP',
+        '10005', 'SERVER',
+        '10006', 'ORG',
+        '10004', 'USER', 
+        '???'
+    ) AS "LEV",
+    DECODE(TO_CHAR(pov.level_id),
+        '10001', '',
+        '10002', app.application_short_name,
+        '10003', rsp.responsibility_key,
+        '10005', svr.node_name,
+        '10006', org.name,
+        '10004', usr.user_name,
+        '???'
+    ) AS "CONTEXT",
+    pov.profile_option_value AS "VALUE"
+FROM   
+    fnd_profile_options_vl po,
+    fnd_profile_option_values pov,
+    fnd_user usr,
+    fnd_application app,
+    fnd_responsibility rsp,
+    fnd_nodes svr,
+    hr_operating_units org
+WHERE  
+    po.profile_option_name LIKE '%&&profile%'
+    AND pov.application_id = po.application_id
+    AND pov.profile_option_id = po.profile_option_id
+    AND usr.user_id (+) = pov.level_value
+    AND rsp.application_id (+) = pov.level_value_application_id
+    AND rsp.responsibility_id (+) = pov.level_value
+    AND app.application_id (+) = pov.level_value
+    AND svr.node_id (+) = pov.level_value
+    AND org.organization_id (+) = pov.level_value
+ORDER BY 
+    1, 
+    pov.level_id, 
+    5;
+
+
