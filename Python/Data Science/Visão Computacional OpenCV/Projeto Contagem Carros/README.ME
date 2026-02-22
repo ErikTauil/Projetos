@@ -1,1 +1,26 @@
+# 🚗 Car Counter: Visão Computacional Aplicada à Mobilidade Urbana
+
+Este projeto utiliza **Visão Computacional** e **Processamento Digital de Imagens** para transformar vídeos de câmeras de monitoramento em uma ferramenta estratégica de análise de dados. Através da linguagem Python e da biblioteca OpenCV, o sistema identifica, rastreia e contabiliza o fluxo de veículos em tempo real.
+
+## 🎯 Aplicações Práticas (Business Case)
+A contagem automatizada via software reduz custos de infraestrutura e permite uma gestão baseada em dados reais:
+* **Gestão de Tráfego:** Base para ajuste inteligente de tempos de semáforo.
+* **Planejamento Urbano:** Identificação de gargalos e horários de pico em rodovias.
+* **Monitoramento Comercial:** Controle de fluxo em estacionamentos, pedágios e drive-thrus.
+
+## 🛠️ Tecnologias e Algoritmos
+* **Linguagem:** Python 3.x
+* **Biblioteca Principal:** OpenCV
+* **Subtração de Fundo:** Uso de algoritmos como `MOG2`, `KNN` ou `CNT` para isolar os carros de elementos estáticos e sombras.
+* **Filtros Morfológicos:** Aplicação de `Dilation`, `Opening` e `Closing` para remover ruídos (como vento em árvores) e garantir que o contorno dos veículos seja sólido e estável.
+
+## 📐 Lógica de Contagem por Centroide
+Para garantir uma precisão superior e evitar contagens duplas, o sistema não monitora apenas o retângulo do objeto, mas sim o seu **Centroide** (o ponto central geométrico).
+
+As coordenadas do centroide $(cx, cy)$ são calculadas a partir da posição $(x, y)$ e das dimensões $(w, h)$ do objeto detectado:
+
+$$cx = x + \left(\frac{w}{2}\right)$$
+$$cy = y + \left(\frac{h}{2}\right)$$
+
+A contagem só é validada quando este ponto exato cruza a **ROI (Region of Interest)** — uma linha virtual de controle posicionada estrategicamente no vídeo. O uso de um `offset` (margem de erro) garante que o centroide seja capturado mesmo em altas velocidades.
 
