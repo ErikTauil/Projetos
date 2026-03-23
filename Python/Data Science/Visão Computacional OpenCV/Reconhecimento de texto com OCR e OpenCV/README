@@ -1,1 +1,58 @@
+​👁️ OCR & Vision Intelligence: Pipeline de Extração e Mineração de Dados
+​
+Este projeto apresenta um ecossistema completo de Reconhecimento Ótico de Caracteres (OCR) e Visão Computacional utilizando Python. A solução abrange desde o tratamento de imagens em cenários naturais até a automação de busca de termos específicos em grandes volumes de documentos (Processamento em Lote).
+​[Image: Pipeline flow from raw image -> OpenCV Processing -> Tesseract Engine -> Structured Text/Visual Feedback]
 
+​🚀 Funcionalidades Principais
+
+​Processamento de Imagens Adaptativo: Conversão BGR/RGB e tratamento de fotos com sombras, reflexos e distorções (cenários não controlados).
+​Segmentação Inteligente (PSM): Ajuste dos Modos de Segmentação de Página para ler desde palavras isoladas em objetos até blocos densos de artigos científicos.
+​Análise de Metadados (OSD): Detecção automática de orientação, rotação e confiança do script (latim/português).
+​Mineração com Regex: Extração automatizada de padrões como datas, e-mails e termos técnicos (ex: "Machine Learning").
+​Automação em Lote (Batch): Processamento simultâneo de diretórios inteiros com consolidação de resultados em arquivos .txt.
+​Interface Visual: Marcação de Bounding Boxes com suporte a fontes externas (Pillow) para sobreposição de texto legível.
+​
+🛠️ Stack Tecnológica
+
+​Linguagem: Python 3.9+
+​Visão Computacional: OpenCV (cv2)
+​Motor OCR: Tesseract (Google)
+​Manipulação de Imagem: Pillow (PIL)
+​Processamento de Dados: NumPy e Regular Expressions (re)
+​Ambiente: Google Colab / Jupyter Notebook
+​
+📖 Estrutura de Implementação
+​1. Preparação e Pré-processamento
+​O motor Tesseract é configurado com suporte à língua portuguesa, garantindo a leitura correta de acentos e cedilhas. As imagens passam por conversões de espaço de cor para otimizar a detecção.
+
+# Configuração de idioma e diretório de treinamento
+config_tesseract = '--tessdata-dir tessdata'
+texto = pytesseract.image_to_string(img_rgb, lang='por', config=config_tesseract)
+
+2. Filtros de Confiança e Falsos Positivos
+​Em cenários naturais (como a leitura de uma caneca), o reflexo da luz pode gerar ruído. O pipeline utiliza um filtro de confiança (min\_conf) e validação de comprimento de string para eliminar caracteres fantasmas.
+
+if confianca > min_conf and not texto.isspace() and len(texto) > 1:
+    # Processa apenas texto relevante
+
+3. Busca e Mineração em Lote
+​O sistema percorre uma pasta de projetos, extrai o texto de cada imagem e utiliza re.finditer para mapear a ocorrência de termos específicos, permitindo classificar documentos por tema automaticamente
+
+# Consolidação em arquivo físico
+with open('resultados_ocr.txt', 'w+') as f:
+    f.write(texto_completo)
+
+4. Visualização com Bounding Boxes
+​Destaque visual seletivo: o sistema desenha caixas delimitadoras apenas nos termos de interesse, facilitando a auditoria visual em documentos extensos.
+​[Image: Artigo com a palavra "learning" destacada em vermelho e o texto reconhecido escrito acima da imagem original]
+​
+📊 Resultados Alcançados
+​Velocidade: Extração e consolidação de múltiplos artigos técnicos em apenas 38 segundos.
+​Acurácia: Redução drástica de erros de leitura após a implementação de dicionários de dados (Output.DICT).
+​Versatilidade: Capacidade de extrair datas específicas de tabelas financeiras e identificar termos em fotos de objetos do cotidiano.
+​
+📂 Como Utilizar
+​Clone o repositório.
+​Certifique-se de ter o Tesseract instalado no seu sistema operativo.
+​Instale as dependências: pip install -r requirements.txt.
+​Execute o notebook principal para processar suas próprias imagens na pasta /Projeto.
