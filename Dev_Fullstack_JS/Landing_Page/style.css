@@ -1,0 +1,349 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --green-dark: #245a3d;
+    --green: #2f7d57;
+    --text: #171b18;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", Arial, sans-serif;
+    color: var(--text);
+    background-color: var(--white);
+}
+
+.header {
+    width: 100%;
+    max-width: 1440px;
+    min-height: 64px;
+    height: 10vh;
+    margin-inline: auto;
+    padding-inline: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.brand__logo {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--green-dark);
+    color: var(--white);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.download-button {
+    min-width: 112px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green);
+    color: var(--white);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.hero {
+    width: 100%;
+    max-width: 1440px;
+    min-height: calc(90vh - 64px);
+    margin-inline: auto;
+    padding: 48px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    overflow: hidden;
+}
+
+.hero__headline {
+    text-align: center;
+}
+
+.hero__headline h1 {
+    max-width: 420px;
+    margin: 0;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.12;
+    font-weight: 500;
+}
+
+.hero__visual {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero__visual img {
+    width: auto;
+    height: min(52vh, 480px);
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 36px;
+}
+
+.hero__features {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    list-style: none;
+}
+
+.hero__features li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.features {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding: 64px 20px;
+}
+
+.features__title {
+    max-width: 520px;
+    margin: 0 auto 48px;
+    text-align: center;
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.15;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 64px;
+}
+
+.feature:last-child {
+    margin-bottom: 0;
+}
+
+.feature__visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.feature__visual img {
+    width: auto;
+    max-width: 100%;
+    height: min(50vh, 500px);
+    object-fit: contain;
+    border-radius: 32px;
+}
+
+.feature__content {
+    width: 100%;
+    text-align: center;
+}
+
+.feature__content h3 {
+    margin: 0 0 12px;
+    font-size: 26px;
+}
+
+.feature__content p {
+    max-width: 440px;
+    margin: 0 auto 12px;
+    color: #4d554f;
+    line-height: 1.6;
+}
+
+.cta {
+    min-height: 320px;
+    padding: 64px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f3f7f4;
+}
+
+.cta h2 {
+    margin: 0 0 28px;
+    font-size: clamp(28px, 8vw, 44px);
+    line-height: 1.15;
+}
+
+.cta__button {
+    min-width: 200px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.cta p {
+    margin: 16px 0 0;
+    color: var(--green-dark);
+    font-weight: 700;
+}
+
+.footer {
+    min-height: 72px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green-dark);
+    color: var(--white);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+@media (width > 900px) {
+    .header {
+        min-height: 72px;
+        padding-inline: clamp(24px, 6vw, 96px);
+    }
+
+    .brand__logo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .download-button {
+        min-width: 128px;
+        padding: 14px 24px;
+    }
+
+    .hero {
+        height: 90vh;
+        min-height: 620px;
+        padding: 24px clamp(24px, 6vw, 96px);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: clamp(24px, 4vw, 64px);
+    }
+
+    .hero__headline {
+        flex: 1 1 0;
+        text-align: left;
+    }
+
+    .hero__headline h1 {
+        max-width: 420px;
+        font-size: clamp(28px, 3vw, 48px);
+    }
+
+    .hero__visual {
+        flex: 1.25 1 0;
+        height: 100%;
+    }
+
+    .hero__visual img {
+        height: min(82vh, 680px);
+    }
+
+    .hero__features {
+        flex: 0 1 220px;
+        width: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 28px;
+    }
+
+    .hero__features li {
+        gap: 12px;
+        font-size: clamp(18px, 1.8vw, 26px);
+    }
+
+    .features {
+        padding: 96px clamp(24px, 6vw, 96px);
+    }
+
+    .features__title {
+        margin-bottom: 72px;
+        font-size: clamp(32px, 3vw, 48px);
+    }
+
+    .feature {
+        min-height: 520px;
+        margin-bottom: 96px;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: clamp(48px, 8vw, 120px);
+    }
+
+    .feature--reverse {
+        flex-direction: row-reverse;
+    }
+
+    .feature__visual,
+    .feature__content {
+        flex: 1 1 0;
+    }
+
+    .feature__visual img {
+        height: min(60vh, 500px);
+    }
+
+    .feature__content {
+        text-align: left;
+    }
+
+    .feature__content h3 {
+        font-size: clamp(28px, 2.5vw, 40px);
+    }
+
+    .feature__content p {
+        max-width: 480px;
+        margin: 0 0 12px;
+        font-size: 18px;
+    }
+
+    .cta {
+        min-height: 400px;
+    }
+
+    .cta__button {
+        min-width: 240px;
+        padding: 18px 32px;
+    }
+
+    .footer {
+        min-height: 80px;
+    }
+}
