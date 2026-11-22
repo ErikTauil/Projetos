@@ -8,9 +8,9 @@
 
 Profissional da área de **Tecnologia, Ciência de Dados, Inteligência Artificial e Desenvolvimento de Software**, com foco na criação de soluções inteligentes que transformam dados e necessidades de negócio em resultados concretos.
 
-Minha atuação envolve desde a **engenharia e análise de dados** até o **desenvolvimento de aplicações web, APIs e soluções de inteligência artificial**.
+Minha atuação envolve desde a **Engenharia e Ciência de dados** até o **desenvolvimento de aplicações web, APIs e soluções de inteligência artificial**.
 
-Trabalho com tecnologias como Python, JavaScript, TypeScript, Django, Node.js, SQL e PostgreSQL, além de ferramentas de Business Intelligence, Machine Learning e automação.
+Trabalho com tecnologias como Python, JavaScript, TypeScript, Django, Node.js, SQL e PostgreSQL, Machine Learning e automações com IA.
 
 Tenho interesse em desenvolver soluções completas, integrando bancos de dados, back-end, front-end, APIs e inteligência artificial.
 
